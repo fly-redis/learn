@@ -558,6 +558,9 @@
     let editingIndex = -1;
     // 新增：记录区间选择的起始索引
     let rangeStartIndex = -1;
+    
+    // 新增：音频映射表
+    let audioMap = {};
 
     // --- IndexedDB 初始化 (用于存储音频) ---
     let db;
@@ -610,6 +613,15 @@
         const saved = localStorage.getItem('english_words');
         if (saved) { words = JSON.parse(saved); }
         renderList();
+        
+        // 尝试加载远程音频映射表，用于在线播放
+        try {
+            const res = await fetch('https://fly-redis.github.io/learn/audio_map.json');
+            if(res.ok) {
+                audioMap = await res.json();
+                console.log('Audio map loaded');
+            }
+        } catch(e) { console.warn('Failed to load audio map', e); }
     };
 
     function save() {
@@ -1195,89 +1207,148 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // --- 新增：批量缓存音频 ---
+    // --- 修改：批量缓存音频 (从 GitHub Pages 获取) ---
     async function cacheAllAudio() {
         const total = words.length;
         if (total === 0) return alert('列表为空');
-        if (!confirm(`确定要尝试缓存 ${total} 个单词的音频吗？\n这将逐个请求百度语音接口并保存到本地。\n注意：受跨域(CORS)限制，普通网页环境可能会失败。`)) return;
+        if (!confirm(`确定要尝试缓存 ${total} 个单词的音频吗？\n资源源自 GitHub Pages。`)) return;
 
         const stats = document.getElementById('word-stats');
         const originalText = stats.innerText;
+        stats.innerText = "正在获取映射表...";
+
+        // 1. 获取映射表
+        let mapData = {};
+        try {
+            const res = await fetch('https://fly-redis.github.io/learn/audio_map.json');
+            if (!res.ok) throw new Error("Manifest fetch failed");
+            mapData = await res.json();
+            audioMap = mapData; // 更新全局变量
+        } catch(e) {
+            alert("获取音频映射表失败，请检查网络");
+            stats.innerText = originalText;
+            return;
+        }
+
         let cached = 0;
         let skipped = 0;
-        let failed = 0;
+        // 修改：使用数组记录失败单词
+        let failedList = [];
 
+        // 2. 遍历下载
         for (let i = 0; i < total; i++) {
             const word = words[i].text;
             stats.innerText = `缓存中 ${i+1}/${total}...`;
             
             try {
-                // 1. 检查是否存在
+                // 检查本地
                 const exists = await getAudioBlob(word);
                 if (exists) {
                     skipped++;
                     continue;
                 }
 
-                // 2. 下载
-                const url = `https://fanyi.baidu.com/gettts?lan=en&text=${encodeURIComponent(word)}&spd=3&source=web`;
+                // 检查远程映射
+                const mp3Name = mapData[word];
+                if (!mp3Name) {
+                    console.warn(`No mapping for ${word}`);
+                    failedList.push(`${word}(无资源)`);
+                    continue;
+                }
+
+                // 下载 MP3
+                const url = `https://fly-redis.github.io/learn/mp3/${mp3Name}`;
                 const resp = await fetch(url);
                 if (resp.ok) {
                     const blob = await resp.blob();
                     saveAudioBlob(word, blob);
                     cached++;
-                    // 延时避免请求过快被封
-                    await new Promise(r => setTimeout(r, 500));
                 } else {
-                    failed++;
+                    failedList.push(`${word}(请求失败)`);
                 }
             } catch (e) {
                 console.warn(`Cache failed for ${word}`, e);
-                failed++;
+                failedList.push(`${word}(错误)`);
             }
         }
         
         stats.innerText = originalText;
-        alert(`任务结束\n新增缓存: ${cached}\n已存在: ${skipped}\n失败: ${failed}\n如果失败较多，通常是因为浏览器安全策略限制了跨域下载。`);
+        
+        // 构建结果消息
+        let msg = `任务结束\n新增缓存: ${cached}\n已存在: ${skipped}\n失败: ${failedList.length}`;
+        if (failedList.length > 0) {
+            // 如果失败太多，只显示前20个，防止弹窗过长
+            const showCount = 20;
+            const displayList = failedList.slice(0, showCount).join(', ');
+            msg += `\n\n失败详情:\n${displayList}`;
+            if (failedList.length > showCount) {
+                msg += `\n...等共 ${failedList.length} 个`;
+            }
+        }
+        alert(msg);
     }
 
-    // 修改：文本朗读功能 (优先使用本地缓存 -> 百度TTS -> 浏览器原生)
+    // 修改：文本朗读功能 (优先本地 -> 远程MP3 -> 失败弹窗)
     async function speak(text) {
-        const url = `https://fanyi.baidu.com/gettts?lan=en&text=${encodeURIComponent(text)}&spd=3&source=web`;
-
         // 1. 尝试从 IndexedDB 本地读取
         try {
             const blob = await getAudioBlob(text);
             if (blob) {
                 console.log('Playing from local cache:', text);
                 const audio = new Audio(URL.createObjectURL(blob));
-                audio.play().catch(e => useBrowserTTS(text));
+                audio.play().catch(e => alert(`播放失败: ${e.message}`));
                 return;
             }
         } catch(e) { console.warn('DB read error', e); }
 
-        // 2. 尝试 Fetch 下载并缓存 (需要浏览器环境支持跨域请求，或使用插件)
-        try {
-            const resp = await fetch(url);
-            if (resp.ok) {
-                const blob = await resp.blob();
-                saveAudioBlob(text, blob); // 存入 DB
-                console.log('Downloaded and cached:', text);
-                const audio = new Audio(URL.createObjectURL(blob));
-                audio.play().catch(e => useBrowserTTS(text));
-                return;
-            }
-        } catch(e) {
-            // 百度接口通常有 CORS 限制，直接 fetch 在普通网页中可能会失败
-            console.log("Fetch failed (CORS restricted?), falling back to direct URL stream");
+        // 2. 尝试从 audioMap 获取远程 URL
+        // 如果 audioMap 还没加载完，尝试临时加载一次
+        if (Object.keys(audioMap).length === 0) {
+             try {
+                const res = await fetch('https://fly-redis.github.io/learn/audio_map.json');
+                if(res.ok) audioMap = await res.json();
+            } catch(e) {}
         }
 
-        // 3. 降级：直接 URL 播放 (不缓存，利用 Audio 标签的跨域能力)
-        const audio = new Audio(url);
-        audio.play().catch(e => {
-            console.warn("Direct play failed, switching to Browser TTS", e);
-            useBrowserTTS(text);
-        });
+        const mp3Name = audioMap[text];
+        if (mp3Name) {
+            const url = `https://fly-redis.github.io/learn/mp3/${mp3Name}`;
+            // 这里我们采用"边下边播"并尝试缓存的策略
+            try {
+                 const resp = await fetch(url);
+                 if (resp.ok) {
+                     const blob = await resp.blob();
+                     saveAudioBlob(text, blob); // 顺便缓存
+                     const audio = new Audio(URL.createObjectURL(blob));
+                     audio.play().catch(e => alert(`音频解码/播放失败: ${text}`));
+                     return;
+                 } else {
+                     alert(`远程资源请求失败 (${resp.status}): ${text}`);
+                     return;
+                 }
+            } catch(e) {
+                alert(`网络请求错误: ${text}`);
+                return;
+            }
+        } else {
+            // 映射表中没有这个词
+            // 尝试降级到浏览器TTS? 或者直接报错
+            // alert(`未找到该单词的音频资源: ${text}`);
+            // 既然要求"失败弹窗", 这里即使没有 Mapping，尝试 TTS 也是好的体验。
+            // 但如果严格按照"从audio_map找关系"的要求，找不到就是失败。
+            
+            if (window.speechSynthesis) {
+                 // 既然没有MP3，尝试一下原有浏览器TTS，如果不想要可以删掉下面几行直接 alert
+                 window.speechSynthesis.cancel();
+                 const u = new SpeechSynthesisUtterance(text);
+                 u.lang = 'en-US'; 
+                 u.rate = 0.8;
+                 u.onerror = () => alert(`无法播放: ${text}`);
+                 window.speechSynthesis.speak(u);
+            } else {
+                alert(`无法播放且无 TTS 支持: ${text}`);
+            }
+        }
     }
 
     function useBrowserTTS(text) {
