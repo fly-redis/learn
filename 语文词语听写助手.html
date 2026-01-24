@@ -705,12 +705,12 @@
         textarea.focus();
     }
 
-    // 新增：从 Gitee 同步 JSON
+    // 新增：从 github 同步 JSON
     function syncFromGitee() {
-        const url = 'https://gitee.com/Every_redis/filedown/raw/master/%E4%B8%89%E5%B9%B4%E7%BA%A7%E4%B8%8A%E5%AD%A6%E6%9C%9F%E8%AF%8D%E8%AF%AD.json';
+        const url = 'https://fly-redis.github.io/learn/%E4%B8%89%E5%B9%B4%E7%BA%A7%E4%B8%8A%E5%AD%A6%E6%9C%9F%E8%AF%8D%E8%AF%AD.json';
         const textarea = document.getElementById('io-textarea');
         
-        textarea.value = '正在从 Gitee 获取数据...';
+        textarea.value = '正在从 github 获取数据...';
         
         fetch(url)
             .then(response => {
