@@ -475,6 +475,8 @@
         <div class="btn" onclick="exportJson()">导出</div>
         <div class="btn" onclick="sortByTime()">时间排序</div>
         <div class="btn" onclick="showHistory()" style="background-color: #E3F2FD; color: #007aff;">历史记录</div>
+        <!-- 新增：缓存音频按钮 -->
+        <div class="btn" onclick="cacheAllAudio()" style="background-color: #34C759; color: white;">缓存音频</div>
         <div class="btn danger" onclick="deleteSelected()">删除选中</div>
         <div class="btn danger" onclick="clearWords()">清空全部</div>
     </div>
@@ -557,8 +559,55 @@
     // 新增：记录区间选择的起始索引
     let rangeStartIndex = -1;
 
-    window.onload = function() {
-        const saved = localStorage.getItem('english_words'); // Changed key
+    // --- IndexedDB 初始化 (用于存储音频) ---
+    let db;
+    const DB_NAME = 'DictationAudioDB';
+    const STORE_NAME = 'audios';
+
+    function initDB() {
+        return new Promise((resolve) => {
+            const request = indexedDB.open(DB_NAME, 1);
+            request.onerror = () => resolve(false);
+            request.onupgradeneeded = (e) => {
+                const d = e.target.result;
+                if (!d.objectStoreNames.contains(STORE_NAME)) {
+                    d.createObjectStore(STORE_NAME);
+                }
+            };
+            request.onsuccess = (e) => {
+                db = e.target.result;
+                resolve(true);
+            };
+        });
+    }
+
+    // 辅助：从数据库获取音频
+    function getAudioBlob(text) {
+        return new Promise((resolve) => {
+            if (!db) return resolve(null);
+            try {
+                const tx = db.transaction(STORE_NAME, 'readonly');
+                const store = tx.objectStore(STORE_NAME);
+                const req = store.get(text);
+                req.onsuccess = (e) => resolve(e.target.result);
+                req.onerror = () => resolve(null);
+            } catch(e) { resolve(null); }
+        });
+    }
+
+    // 辅助：保存音频到数据库
+    function saveAudioBlob(text, blob) {
+        if (!db) return;
+        try {
+            const tx = db.transaction(STORE_NAME, 'readwrite');
+            const store = tx.objectStore(STORE_NAME);
+            store.put(blob, text);
+        } catch(e) { console.warn('Save audio failed', e); }
+    }
+
+    window.onload = async function() { // 改为 async
+        await initDB(); // 等待数据库初始化
+        const saved = localStorage.getItem('english_words');
         if (saved) { words = JSON.parse(saved); }
         renderList();
     };
@@ -579,6 +628,10 @@
         words.forEach((item, index) => {
             const li = document.createElement('li');
             li.className = 'word-item';
+            
+            // 转义英文中的单引号，防止破坏 onclick 语法
+            const safeText = item.text.replace(/'/g, "\\'");
+
             // 修改：HTML结构调整，突出英文显示
             li.innerHTML = `
                 <div class="word-item-top">
@@ -598,6 +651,8 @@
                     
                     <!-- 右侧按钮：纵向堆叠 -->
                     <div class="action-btns">
+                        <!-- 新增：播放按钮 -->
+                         <div class="icon-btn" style="background:#e3f2fd; color:#007aff;" onclick="speak('${safeText}')">播放</div>
                         <div class="icon-btn" onclick="editWord(${index})">编辑</div>
                         <div class="icon-btn" style="color:var(--danger-color); background:#fff0f0;" onclick="deleteWord(${index})">删除</div>
                     </div>
@@ -653,6 +708,9 @@
         if (editingIndex === -1) {
             // text存英文, pinyin存中文意思
             words.push({ id: Date.now(), text: w, pinyin: p || ' ', checked: true });
+            // 新增：添加单词时自动朗读并尝试缓存
+            // 注意：如果遇到跨域限制(CORS)无法下载文件，代码会自动降级为直接播放URL
+            speak(w);
         } else {
             words[editingIndex].text = w;
             words[editingIndex].pinyin = p;
@@ -1137,17 +1195,97 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 新增：文本朗读功能
-    function speak(text) {
-        if (!window.speechSynthesis) {
-            return alert("您的浏览器不支持语音播放");
+    // --- 新增：批量缓存音频 ---
+    async function cacheAllAudio() {
+        const total = words.length;
+        if (total === 0) return alert('列表为空');
+        if (!confirm(`确定要尝试缓存 ${total} 个单词的音频吗？\n这将逐个请求百度语音接口并保存到本地。\n注意：受跨域(CORS)限制，普通网页环境可能会失败。`)) return;
+
+        const stats = document.getElementById('word-stats');
+        const originalText = stats.innerText;
+        let cached = 0;
+        let skipped = 0;
+        let failed = 0;
+
+        for (let i = 0; i < total; i++) {
+            const word = words[i].text;
+            stats.innerText = `缓存中 ${i+1}/${total}...`;
+            
+            try {
+                // 1. 检查是否存在
+                const exists = await getAudioBlob(word);
+                if (exists) {
+                    skipped++;
+                    continue;
+                }
+
+                // 2. 下载
+                const url = `https://fanyi.baidu.com/gettts?lan=en&text=${encodeURIComponent(word)}&spd=3&source=web`;
+                const resp = await fetch(url);
+                if (resp.ok) {
+                    const blob = await resp.blob();
+                    saveAudioBlob(word, blob);
+                    cached++;
+                    // 延时避免请求过快被封
+                    await new Promise(r => setTimeout(r, 500));
+                } else {
+                    failed++;
+                }
+            } catch (e) {
+                console.warn(`Cache failed for ${word}`, e);
+                failed++;
+            }
         }
-        // 取消正在播放的
-        window.speechSynthesis.cancel();
         
+        stats.innerText = originalText;
+        alert(`任务结束\n新增缓存: ${cached}\n已存在: ${skipped}\n失败: ${failed}\n如果失败较多，通常是因为浏览器安全策略限制了跨域下载。`);
+    }
+
+    // 修改：文本朗读功能 (优先使用本地缓存 -> 百度TTS -> 浏览器原生)
+    async function speak(text) {
+        const url = `https://fanyi.baidu.com/gettts?lan=en&text=${encodeURIComponent(text)}&spd=3&source=web`;
+
+        // 1. 尝试从 IndexedDB 本地读取
+        try {
+            const blob = await getAudioBlob(text);
+            if (blob) {
+                console.log('Playing from local cache:', text);
+                const audio = new Audio(URL.createObjectURL(blob));
+                audio.play().catch(e => useBrowserTTS(text));
+                return;
+            }
+        } catch(e) { console.warn('DB read error', e); }
+
+        // 2. 尝试 Fetch 下载并缓存 (需要浏览器环境支持跨域请求，或使用插件)
+        try {
+            const resp = await fetch(url);
+            if (resp.ok) {
+                const blob = await resp.blob();
+                saveAudioBlob(text, blob); // 存入 DB
+                console.log('Downloaded and cached:', text);
+                const audio = new Audio(URL.createObjectURL(blob));
+                audio.play().catch(e => useBrowserTTS(text));
+                return;
+            }
+        } catch(e) {
+            // 百度接口通常有 CORS 限制，直接 fetch 在普通网页中可能会失败
+            console.log("Fetch failed (CORS restricted?), falling back to direct URL stream");
+        }
+
+        // 3. 降级：直接 URL 播放 (不缓存，利用 Audio 标签的跨域能力)
+        const audio = new Audio(url);
+        audio.play().catch(e => {
+            console.warn("Direct play failed, switching to Browser TTS", e);
+            useBrowserTTS(text);
+        });
+    }
+
+    function useBrowserTTS(text) {
+        if (!window.speechSynthesis) return;
+        window.speechSynthesis.cancel();
         const u = new SpeechSynthesisUtterance(text);
-        u.lang = 'en-US'; // 设置为美式英语
-        u.rate = 0.8; // 稍微慢一点语速，适合学习
+        u.lang = 'en-US'; 
+        u.rate = 0.8; 
         window.speechSynthesis.speak(u);
     }
 </script>
