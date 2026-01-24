@@ -905,8 +905,13 @@
         
         textarea.value = '正在从 github 获取数据...';
         
-        fetch(url)
+        // 设置3秒超时
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+
+        fetch(url, { signal: controller.signal })
             .then(response => {
+                clearTimeout(timeoutId);
                 if (!response.ok) throw new Error('网络请求失败');
                 return response.text();
             })
@@ -915,8 +920,13 @@
                 alert('获取成功！请检查内容并点击"确认"完成导入。');
             })
             .catch(err => {
-                textarea.value = '';
-                alert('同步失败: ' + err.message);
+                if (err.name === 'AbortError') {
+                    textarea.value = '';
+                    alert('同步失败: 请求超时 (3秒)');
+                } else {
+                    textarea.value = '';
+                    alert('同步失败: ' + err.message);
+                }
             });
     }
 
