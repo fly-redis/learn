@@ -444,6 +444,24 @@
         }
         #back-to-top:active { transform: scale(0.9); }
 
+        /* 新增：弹窗关闭图标 */
+        .close-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: #f2f2f7;
+            border-radius: 50%;
+            color: #8e8e93;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+        }
+
     </style>
 </head>
 <body>
@@ -477,6 +495,10 @@
         <div class="btn" onclick="showHistory()" style="background-color: #E3F2FD; color: #007aff;">历史记录</div>
         <!-- 新增：缓存音频按钮 -->
         <div class="btn" onclick="cacheAllAudio()" style="background-color: #34C759; color: white;">缓存音频</div>
+        <!-- 新增：缓存管理按钮 -->
+        <div class="btn" onclick="listCachedAudio()" style="background-color: #34C759; color: white;">缓存清单</div>
+        <div class="btn danger" onclick="clearAudioCache()">清空音频</div>
+        
         <div class="btn danger" onclick="deleteSelected()">删除选中</div>
         <div class="btn danger" onclick="clearWords()">清空全部</div>
     </div>
@@ -520,6 +542,27 @@
         </ul>
         <div class="modal-btns">
              <button class="btn secondary" style="grid-column: span 2;" onclick="closeHistoryModal()">关闭</button>
+        </div>
+    </div>
+</div>
+
+<!-- 新增：缓存清单弹窗 (已优化布局：列表滚动，按钮固定) -->
+<div id="cache-modal" class="modal" style="display: none;">
+    <div class="modal-content" style="max-height: 80vh; display: flex; flex-direction: column; position: relative;">
+        <!-- 右上角关闭按钮 -->
+        <div class="close-icon" onclick="closeCacheModal()">×</div>
+        
+        <h3 id="cache-modal-title" style="text-align:center; margin-top: 0; flex-shrink: 0;">本地缓存清单</h3>
+        
+        <!-- 列表区域：自动可以滚动 -->
+        <div style="flex: 1; overflow-y: auto; margin: 10px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee;">
+             <ul id="cache-list" style="padding:0; margin:0; list-style:none;">
+                <!-- JS 生成 -->
+            </ul>
+        </div>
+        
+        <div class="modal-btns" style="margin-top: 0; flex-shrink: 0;">
+             <button class="btn secondary" style="grid-column: span 2;" onclick="closeCacheModal()">关闭</button>
         </div>
     </div>
 </div>
@@ -606,6 +649,91 @@
             const store = tx.objectStore(STORE_NAME);
             store.put(blob, text);
         } catch(e) { console.warn('Save audio failed', e); }
+    }
+
+    // 新增：获取所有音频Key
+    function getAllAudioKeys() {
+        return new Promise((resolve) => {
+            if (!db) return resolve([]);
+            try {
+                const tx = db.transaction(STORE_NAME, 'readonly');
+                const store = tx.objectStore(STORE_NAME);
+                const req = store.getAllKeys();
+                req.onsuccess = (e) => resolve(e.target.result);
+                req.onerror = () => resolve([]);
+            } catch(e) { resolve([]); }
+        });
+    }
+
+    // 修改：展示缓存清单 (使用专用弹窗 + 删除按钮)
+    async function listCachedAudio() {
+        const keys = await getAllAudioKeys();
+        const listDom = document.getElementById('cache-list');
+        listDom.innerHTML = '';
+
+        if (keys.length === 0) {
+            listDom.innerHTML = '<div style="text-align:center; color:#999; padding:20px;">暂无缓存音频</div>';
+        } else {
+            keys.forEach(key => {
+                const li = document.createElement('li');
+                // 复用 history-record 的样式让列表整洁
+                li.className = 'history-record';
+                li.style.display = 'flex';
+                li.style.justifyContent = 'space-between';
+                li.style.alignItems = 'center';
+
+                // 转义只针对 onclick 中的字符串参数
+                const safeKey = key.replace(/'/g, "\\'");
+                
+                li.innerHTML = `
+                    <span style="font-size:15px; font-weight:500; word-break: break-all;">${key}</span>
+                    <button class="icon-btn" style="color:var(--danger-color); background:#fff0f0; margin-left:10px; flex-shrink:0;" onclick="deleteOneCache('${safeKey}')">删除</button>
+                `;
+                listDom.appendChild(li);
+            });
+        }
+        
+        document.getElementById('cache-modal-title').innerText = `本地缓存清单 (${keys.length})`;
+        document.getElementById('cache-modal').style.display = 'flex';
+    }
+
+    // 新增：关闭缓存弹窗
+    function closeCacheModal() {
+        document.getElementById('cache-modal').style.display = 'none';
+    }
+
+    // 新增：删除单个缓存
+    function deleteOneCache(key) {
+        if (!db) return;
+        if (!confirm(`确定删除音频缓存 "${key}" 吗？`)) return;
+        
+        try {
+            const tx = db.transaction(STORE_NAME, 'readwrite');
+            const store = tx.objectStore(STORE_NAME);
+            const req = store.delete(key);
+            req.onsuccess = () => {
+                // 删除成功后刷新列表
+                listCachedAudio(); 
+            };
+            req.onerror = () => alert('删除失败');
+        } catch(e) { console.error(e); }
+    }
+
+    // 新增：清空音频缓存
+    function clearAudioCache() {
+        if (!db) return alert('数据库未连接');
+        getAllAudioKeys().then(keys => {
+             if (keys.length === 0) return alert('本地没有缓存音频');
+             if (!confirm(`检测到本地有 ${keys.length} 个音频缓存。\n确定要全部删除吗？(不会删除单词)`)) return;
+             
+             try {
+                const tx = db.transaction(STORE_NAME, 'readwrite');
+                const store = tx.objectStore(STORE_NAME);
+                const req = store.clear();
+                req.onsuccess = () => alert('音频缓存已清空');
+                req.onerror = () => alert('删除失败');
+             } catch (e) { alert('操作失败:' + e.message); }
+        });
     }
 
     window.onload = async function() { // 改为 async
