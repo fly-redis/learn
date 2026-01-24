@@ -414,6 +414,87 @@
             margin-top: 15px;
         }
 
+        /* 新增：历史记录相关样式 */
+        .history-record {
+            background: #f9f9f9;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            list-style: none;
+        }
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .history-time { font-size: 14px; color: #333; line-height: 1.4; }
+        .history-actions { display: flex; gap: 8px; }
+        .history-details {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            display: none; /* 默认隐藏 */
+            flex-wrap: wrap; /* 自动换行 */
+            gap: 6px;
+        }
+        .history-tag {
+            background: #e5e5ea;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #333;
+        }
+
+        /* 新增：悬浮控制区 (统计 + 按钮) */
+        .float-controls {
+            position: fixed;
+            bottom: 120px;
+            right: 20px;
+            display: flex;
+            flex-direction: column-reverse; /* 按钮在下，统计在上 */
+            align-items: flex-end;
+            gap: 10px;
+            z-index: 950;
+            pointer-events: none; /* 容器本身不阻挡点击 */
+        }
+
+        .word-stats-pill {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            pointer-events: auto;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        /* 修改：回到顶部按钮样式 (适配悬浮容器) */
+        #back-to-top {
+            /* 移除 fixed 定位，由容器控制位置 */
+            position: static;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none; /* 默认隐藏 */
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--primary-color);
+            font-size: 20px;
+            font-weight: bold;
+            transition: all 0.3s;
+            pointer-events: auto;
+        }
+        #back-to-top:active { transform: scale(0.9); }
+
     </style>
 </head>
 <body>
@@ -442,6 +523,8 @@
         <div class="btn" onclick="selectAll()">全选</div>
         <div class="btn" onclick="importJson()">导入</div>
         <div class="btn" onclick="exportJson()">导出</div>
+        <div class="btn" onclick="sortByTime()">时间排序</div>
+        <div class="btn" onclick="showHistory()" style="background-color: #E3F2FD; color: #007aff;">历史记录</div>
         <div class="btn danger" onclick="deleteSelected()">删除选中</div>
         <div class="btn danger" onclick="clearWords()">清空全部</div>
     </div>
@@ -470,6 +553,25 @@
     <div id="dictation-area"></div>
 </div>
 
+<!-- 修改：浮动控制组 -->
+<div class="float-controls">
+    <div id="back-to-top" onclick="scrollToTop()">↑</div>
+    <div id="word-stats" class="word-stats-pill">统计加载中...</div>
+</div>
+
+<!-- 新增：历史记录弹窗 -->
+<div id="history-modal" class="modal" style="display: none;">
+    <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
+        <h3 id="modal-title" style="text-align:center;">听写记录 (最近5次)</h3>
+        <ul id="history-list" style="padding:0; margin:0; list-style:none;">
+            <!-- JS 生成 -->
+        </ul>
+        <div class="modal-btns">
+             <button class="btn secondary" style="grid-column: span 2;" onclick="closeHistoryModal()">关闭</button>
+        </div>
+    </div>
+</div>
+
 <!-- 导入导出弹窗 -->
 <div id="io-modal" class="modal" style="display: none;">
     <div class="modal-content">
@@ -479,8 +581,10 @@
         <div class="modal-btns">
             <!-- 复制按钮 (导出时显示) -->
             <button class="btn secondary" id="copy-btn" onclick="copyToClipboard()">复制</button>
+            <!-- 新增：下载按钮 (导出时显示) -->
+            <button class="btn secondary" id="download-btn" onclick="downloadJson()" style="display: none; background-color: #007aff; color: white;">下载文件</button>
             <!-- 新增：同步按钮 (导入时显示) -->
-            <button class="btn secondary" id="sync-btn" onclick="syncFromGitee()" style="background-color: #34C759; color: white; display: none;">同步Gitee</button>
+            <button class="btn secondary" id="sync-btn" onclick="syncFromGitee()" style="background-color: #34C759; color: white; display: none;">同步github</button>
             <!-- 清空按钮 (导入时显示) -->
             <button class="btn danger" id="clear-btn" onclick="clearTextarea()">清空</button>
             <!-- 关闭按钮 (常驻) -->
@@ -517,6 +621,11 @@
     function renderList() {
         const listDom = document.getElementById('word-list-dom');
         listDom.innerHTML = '';
+        
+        // 更新统计信息
+        const selectedCount = words.filter(w => w.checked).length;
+        document.getElementById('word-stats').innerText = `已选 ${selectedCount} / 共 ${words.length}`;
+
         words.forEach((item, index) => {
             const li = document.createElement('li');
             li.className = 'word-item';
@@ -678,6 +787,24 @@
         }
     }
 
+    // 新增：按时间排序功能
+    let sortAsc = true; // 排序状态标记
+    function sortByTime() {
+        // 排序会打乱索引，因此先取消编辑和区间选择
+        if(editingIndex !== -1) cancelEdit();
+        rangeStartIndex = -1;
+
+        words.sort((a, b) => {
+            const t1 = a.lastTested || 0;
+            const t2 = b.lastTested || 0;
+            // 升序：未测试(0)在前；降序：最近测试(大时间戳)在前
+            return sortAsc ? (t1 - t2) : (t2 - t1);
+        });
+        
+        sortAsc = !sortAsc; // 切换下次排序顺序
+        save(); // 保存顺序并重新渲染
+    }
+
     // --- 新增: 复制文本 ---
     function copyToClipboard() {
         const textarea = document.getElementById('io-textarea');
@@ -703,6 +830,27 @@
         const textarea = document.getElementById('io-textarea');
         textarea.value = '';
         textarea.focus();
+    }
+
+    // 新增：下载 JSON 文件
+    function downloadJson() {
+        const content = document.getElementById('io-textarea').value;
+        if (!content) return;
+
+        const d = new Date();
+        const dateStr = `${d.getFullYear()}-${(d.getMonth()+1).toString().padStart(2,'0')}-${d.getDate().toString().padStart(2,'0')}`;
+        const fileName = `${dateStr}-词语.json`;
+
+        const blob = new Blob([content], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     }
 
     // 新增：从 github 同步 JSON
@@ -737,6 +885,7 @@
         // 获取按钮DOM
         const actionBtn = document.getElementById('modal-action-btn');
         const copyBtn = document.getElementById('copy-btn');
+        const downloadBtn = document.getElementById('download-btn'); // 新增
         const clearBtn = document.getElementById('clear-btn');
         const syncBtn = document.getElementById('sync-btn'); // 新增
         const textarea = document.getElementById('io-textarea');
@@ -747,6 +896,7 @@
             clearBtn.style.display = 'block';
             syncBtn.style.display = 'block'; // 显示同步按钮
             copyBtn.style.display = 'none';
+            downloadBtn.style.display = 'none'; // 隐藏下载
             textarea.readOnly = false;
         } else {
             // 导出模式: 显示复制；隐藏确认、清空、同步
@@ -754,6 +904,7 @@
             clearBtn.style.display = 'none';
             syncBtn.style.display = 'none'; // 隐藏同步按钮
             copyBtn.style.display = 'block';
+            downloadBtn.style.display = 'block'; // 显示下载
             textarea.readOnly = true;
             textarea.select();
         }
@@ -800,7 +951,7 @@
         const h = d.getHours().toString().padStart(2, '0');
         const min = d.getMinutes().toString().padStart(2, '0');
         const s = d.getSeconds().toString().padStart(2, '0');
-        return `${y}年${m}月${day}日${h}:${min}:${s}`;
+        return `${y}年${m}月${day}日 ${h}:${min}:${s}`;
     }
 
 
@@ -811,6 +962,9 @@
         
         const selected = words.filter(w => w.checked);
         if(selected.length === 0) return alert('请先勾选');
+
+        // 新增：保存到历史记录
+        addToHistory(selected);
 
         // 新增：更新选中词语的测试时间
         const now = Date.now();
@@ -887,6 +1041,126 @@
             if(anyHidden) c.classList.add('revealed');
             else c.classList.remove('revealed');
         });
+    }
+
+    // --- 新增：历史记录相关逻辑 ---
+    
+    function addToHistory(selectedWords) {
+        let history = JSON.parse(localStorage.getItem('dictation_history') || '[]');
+        const record = {
+            timestamp: Date.now(),
+            wordTexts: selectedWords.map(w => w.text) // 只存文本，方便检索
+        };
+        // 加到最前面
+        history.unshift(record);
+        // 只保留最近5条
+        if (history.length > 5) {
+            history = history.slice(0, 5);
+        }
+        localStorage.setItem('dictation_history', JSON.stringify(history));
+    }
+
+    function showHistory() {
+        const history = JSON.parse(localStorage.getItem('dictation_history') || '[]');
+        const listDom = document.getElementById('history-list');
+        listDom.innerHTML = '';
+        
+        if (history.length === 0) {
+            listDom.innerHTML = '<div style="text-align:center; color:#999; padding:20px;">暂无历史记录</div>';
+        } else {
+            history.forEach((rec, idx) => {
+                const li = document.createElement('li');
+                li.className = 'history-record';
+                li.innerHTML = `
+                    <div class="history-header">
+                        <div class="history-time">
+                            ${formatDate(rec.timestamp)}
+                            <br><span style="font-size:12px;color:#999">词数: ${rec.wordTexts.length}</span>
+                        </div>
+                        <div class="history-actions">
+                            <button class="icon-btn" onclick="toggleHistoryDetail(this)">详情</button>
+                            <button class="icon-btn" style="background:#e3f2fd; color:#007aff;" onclick="restoreHistory(${idx})">重测</button>
+                        </div>
+                    </div>
+                    <div class="history-details">
+                        ${rec.wordTexts.map(t => `<span class="history-tag">${t}</span>`).join('')}
+                    </div>
+                `;
+                listDom.appendChild(li);
+            });
+        }
+        document.getElementById('history-modal').style.display = 'flex';
+    }
+
+    function closeHistoryModal() {
+        document.getElementById('history-modal').style.display = 'none';
+    }
+
+    function toggleHistoryDetail(btn) {
+        const details = btn.parentElement.parentElement.nextElementSibling;
+        if (details.style.display === 'flex') {
+            details.style.display = 'none';
+            btn.innerText = '详情';
+        } else {
+            details.style.display = 'flex';
+            btn.innerText = '收起';
+        }
+    }
+
+    function restoreHistory(idx) {
+        const history = JSON.parse(localStorage.getItem('dictation_history') || '[]');
+        const rec = history[idx];
+        if (!rec) return;
+        
+        // 1. 清空当前所有选择
+        words.forEach(w => w.checked = false);
+        
+        const missing = [];
+        let count = 0;
+        
+        // 2. 遍历记录中的词，在现有列表中查找并选中
+        rec.wordTexts.forEach(txt => {
+            const found = words.find(w => w.text === txt);
+            if (found) {
+                found.checked = true;
+                count++;
+            } else {
+                missing.push(txt);
+            }
+        });
+        
+        // 3. 保存状态并更新界面
+        save();     // 保存选中状态
+        renderList(); // 重绘主列表
+        closeHistoryModal(); // 关闭弹窗
+        
+        // 4. 提示结果
+        let msg = `已选中历史记录中的 ${count} 个词语。`;
+        if (missing.length > 0) {
+            msg += `\n\n注意：以下 ${missing.length} 个词语在当前列表中未找到（可能已被删除）：\n${missing.join(', ')}`;
+        }
+        alert(msg);
+    }
+
+    function exitDictation() {
+        document.getElementById('dictation-page').style.display = 'none';
+        document.getElementById('main-page').style.display = 'block';
+        document.getElementById('header-title').innerText = "词语本";
+    }
+
+    // --- 新增：滚动回顶部逻辑 ---
+    window.onscroll = function() {
+        const btn = document.getElementById('back-to-top');
+        // 滚动超过300px显示按钮
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            btn.style.display = 'flex';
+        } else {
+            btn.style.display = 'none';
+        }
+    };
+
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 </script>
 
