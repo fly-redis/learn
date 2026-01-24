@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>语文词语听写助手</title>
+    <!-- 引入拼音库 -->
+    <script src="https://unpkg.com/pinyin-pro"></script>
+    <style>
+        :root {
+            --primary-color: #007aff; /* iOS Blue */
+            --danger-color: #ff3b30;
+            --bg-color: #f2f2f7;
+            --card-bg: #ffffff;
+            --text-primary: #000000;
+            --text-secondary: #8e8e93;
+            --border-color: #e5e5ea;
+        }
+        
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            padding-top: 50px; /* Space for header */
+            padding-bottom: 90px; /* Space for bottom button */
+        }
+
+        /* App 顶部栏 */
+        .app-header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 50px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 600;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 15px;
+        }
+
+        /* 卡片通用样式 */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        /* 输入区 */
+        .input-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .input-row input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid transparent;
+            background: #f2f2f7;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        .input-row input:focus {
+            background: #fff;
+            border-color: var(--primary-color);
+        }
+
+        /* 按钮通用 */
+        .btn {
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            background-color: var(--primary-color);
+            color: white;
+            transition: opacity 0.2s;
+        }
+        .btn:active { opacity: 0.7; }
+        .btn.block { display: block; width: 100%; }
+        .btn.secondary { background-color: #f2f2f7; color: var(--primary-color); }
+        .btn.danger { background-color: #fff0f0; color: var(--danger-color); }
+        
+        /* 工具栏网格 */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 改为3列适配5个按钮 */
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .tools-grid .btn {
+            font-size: 13px;
+            padding: 10px 0;
+            background: var(--card-bg);
+            color: var(--primary-color);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .tools-grid .btn.danger { color: var(--danger-color); }
+
+        /* 列表样式 */
+        .word-list {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        .word-item {
+            background: var(--card-bg);
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column; /* 改为纵向布局 */
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+
+        /* 新增：上半部分容器 */
+        .word-item-top {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        /* 自定义复选框 UI */
+        .checkbox-wrapper {
+            margin-right: 0; /* 移除外边距 */
+            /* 增加点击区域 */
+            padding: 2px; /* 减小内边距 */
+            cursor: pointer;
+        }
+        
+        /* 新增：方形区间选择框 */
+        .range-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #c7c7cc;
+            border-radius: 4px; /* 方形圆角 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            margin-right: 0; /* 紧挨着 */
+        }
+        /* 激活状态 (作为起点) */
+        .range-checkbox.active {
+            border-color: #FF9500; /* 使用橙色区分 */
+            background: #FF9500;
+        }
+        .range-checkbox.active::after {
+            content: 'S'; /* S for Start */
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* 原有圆形复选框 */
+        .custom-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #c7c7cc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            margin-left: 2px; /* 给一点微小的间距 */
+        }
+        .custom-checkbox.checked {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        .custom-checkbox::after {
+            content: '';
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            display: none;
+            margin-top: -2px;
+        }
+        .custom-checkbox.checked::after { display: block; }
+
+        .word-content { 
+            flex: 1; 
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column; /* 改为纵向排列：拼音在上 */
+            justify-content: center;
+            align-items: flex-start; /* 左对齐 */
+            padding-left: 15px; /* 与选框的间距 */
+            min-width: 0; /* 关键：允许Flex子项在内容过长时收缩换行 */
+        }
+        .word-pinyin { 
+            font-size: 17px; 
+            
+            color: #000; /* 黑色 */
+            margin-bottom: 4px; 
+            line-height: 1.3;
+            word-wrap: break-word; /* 长拼音换行 */
+        }
+        .word-text { 
+            font-size: 16px; 
+            
+            color: #333; 
+            margin-bottom: 0; 
+            line-height: 1.3;
+            word-wrap: break-word; /* 长词语换行 */
+        }
+        /* 修改：下半部分时间样式 */
+        .last-tested { 
+            font-size: 13px; 
+            color: #888; 
+            margin-top: 8px; 
+            line-height: 0.4;
+            padding-left: 0px; /* 缩进以对齐文字内容 */
+        }
+
+        .action-btns {
+            display: flex;
+            flex-direction: column; /* 按钮改为纵向堆叠 */
+            gap: 8px;
+            margin-left: 10px;
+            flex-shrink: 0; /* 防止按钮被挤压 */
+        }
+        .icon-btn {
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            background: #f2f2f7;
+            color: var(--text-secondary);
+        }
+
+        /* 底部固定栏 */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            padding: 15px 20px 30px 20px; /* 适配 iPhone X 底部 */
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            z-index: 900;
+        }
+        .start-btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 18px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,122,255,0.3);
+        }
+
+        /* 听写页面 */
+        #dictation-page { padding-top: 60px; display: none; }
+        .dictation-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        /* 田字格样式 */
+        .tzg-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .tzg-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .tzg-pinyin {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 8px;
+            font-family: Arial, sans-serif;
+            min-height: 24px;
+        }
+        .tzg-box {
+            width: 64px;
+            height: 64px;
+            border: 2px solid #333;
+            position: relative;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* 田字格虚线 */
+        .tzg-box::before {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; left: 50%;
+            border-left: 1px dashed #bdbdbd;
+            transform: translateX(-50%);
+        }
+        .tzg-box::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0; top: 50%;
+            border-top: 1px dashed #bdbdbd;
+            transform: translateY(-50%);
+        }
+        .tzg-char {
+            font-family: "KaiTi", "楷体", "STKaiti", serif;
+            font-size: 42px;
+            z-index: 2;
+            color: var(--primary-color);
+            transition: opacity 0.3s;
+        }
+
+        /* 模式1: 看拼音写词 (默认) - 隐藏汉字, 显示拼音 */
+        .dictation-card.mode-py2wd .tzg-char { opacity: 0; }
+        .dictation-card.mode-py2wd.revealed .tzg-char { opacity: 1; }
+
+        /* 模式2: 看词写拼音 - 显示汉字, 隐藏拼音 */
+        .dictation-card.mode-wd2py .tzg-char { opacity: 1; }
+        .dictation-card.mode-wd2py .tzg-pinyin,
+        .dictation-card.mode-wd2py .dictation-pinyin { opacity: 0; transition: opacity 0.3s; }
+        .dictation-card.mode-wd2py.revealed .tzg-pinyin,
+        .dictation-card.mode-wd2py.revealed .dictation-pinyin { opacity: 1; }
+
+        /* 兼容旧的拼音显示（当无法一一对应时） */
+        .dictation-pinyin { 
+            font-size: 24px; 
+            color: #333; 
+            margin-bottom: 15px; 
+            font-weight: 500;
+        }
+        .hint { color: #aaa; margin-top: 10px; font-size: 13px; }
+
+        /* 弹窗优化 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            display: flex; /* 改为 flex 布局，但默认隐藏需用 JS 控制 */
+            align-items: center; /* 垂直居中 */
+            justify-content: center; /* 水平居中 */
+            /* 注意：display:none 会覆盖 flex，所以在样式里还要处理 */
+        }
+        /* 覆盖之前的 display:none，使用具体的类来控制显示 */
+        .modal[style*="display: block"] {
+            display: flex !important;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            /* 去掉之前的 margin，因为现在用 flex 居中 */
+            margin: 0; 
+        }
+        
+        #io-textarea {
+            width: 100%;
+            height: 150px;
+            border: 1px solid #e0e0e0;
+            padding: 12px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 14px;
+            resize: none;
+            background-color: #f9f9f9;
+            margin-bottom: 10px;
+            box-sizing: border-box; /* 确保 padding 不会撑破宽度 */
+        }
+        
+        #io-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: #fff;
+        }
+        
+        /* 弹窗标题 */
+        #modal-title {
+            margin: 0 0 15px 0;
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* 弹窗按钮组网格布局 */
+        .modal-btns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+    </style>
+</head>
+<body>
+
+<header class="app-header" id="header-title">词语本</header>
+
+<div class="container" id="main-page">
+    
+    <!-- 输入卡片 -->
+    <div class="card">
+        <div class="input-row">
+            <input type="text" id="new-word" placeholder="输入词语 (自动生成拼音)" oninput="autoGeneratePinyin()">
+        </div>
+        <div class="input-row">
+            <input type="text" id="new-pinyin" placeholder="拼音">
+            <button class="btn secondary" onclick="autoGeneratePinyin()" style="padding: 0 15px; font-size: 14px; white-space: nowrap;">生成拼音</button>
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <button class="btn block" style="flex:1" id="submit-btn" onclick="handleWordSubmit()">添加</button>
+            <button class="btn secondary" id="cancel-btn" onclick="cancelEdit()" style="display:none; width: 80px;">取消</button>
+        </div>
+    </div>
+
+    <!-- 工具栏 -->
+    <div class="tools-grid">
+        <div class="btn" onclick="selectAll()">全选</div>
+        <div class="btn" onclick="importJson()">导入</div>
+        <div class="btn" onclick="exportJson()">导出</div>
+        <div class="btn danger" onclick="deleteSelected()">删除选中</div>
+        <div class="btn danger" onclick="clearWords()">清空全部</div>
+    </div>
+
+    <ul class="word-list" id="word-list-dom">
+        <!-- 列表由JS生成 -->
+    </ul>
+
+    <div class="bottom-bar">
+        <div style="display: flex; gap: 10px;">
+            <button class="btn start-btn" style="flex: 1;" onclick="startDictation('py2wd')">
+                看拼音写词
+            </button>
+            <button class="btn start-btn" style="flex: 1; background-color: #FF9500;" onclick="startDictation('wd2py')">
+                看词写拼音
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="dictation-page">
+    <div style="margin-bottom: 20px; display: flex; gap: 10px;">
+        <button class="btn secondary" style="flex:1" onclick="exitDictation()">退出</button>
+        <button class="btn secondary" style="flex:1" onclick="toggleAllAnswers()">显示答案</button>
+    </div>
+    <div id="dictation-area"></div>
+</div>
+
+<!-- 导入导出弹窗 -->
+<div id="io-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h3 id="modal-title">导入/导出</h3>
+        <textarea id="io-textarea" placeholder="在此处粘贴内容..."></textarea>
+        <!-- 修改按钮区域 -->
+        <div class="modal-btns">
+            <!-- 复制按钮 (导出时显示) -->
+            <button class="btn secondary" id="copy-btn" onclick="copyToClipboard()">复制</button>
+            <!-- 新增：同步按钮 (导入时显示) -->
+            <button class="btn secondary" id="sync-btn" onclick="syncFromGitee()" style="background-color: #34C759; color: white; display: none;">同步Gitee</button>
+            <!-- 清空按钮 (导入时显示) -->
+            <button class="btn danger" id="clear-btn" onclick="clearTextarea()">清空</button>
+            <!-- 关闭按钮 (常驻) -->
+            <button class="btn secondary" onclick="closeModal()">关闭</button>
+            <!-- 确认按钮 (导入时显示) -->
+            <button class="btn" id="modal-action-btn" onclick="confirmImport()">确认</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 默认数据
+    let words = [
+        { id: 1, text: "清脆", pinyin: "qīng cuì", checked: true },
+        { id: 2, text: "糟糕", pinyin: "zāo gāo", checked: true },
+        { id: 3, text: "蝴蝶", pinyin: "hú dié", checked: false }
+    ];
+
+    let editingIndex = -1;
+    // 新增：记录区间选择的起始索引
+    let rangeStartIndex = -1;
+
+    window.onload = function() {
+        const saved = localStorage.getItem('dictation_words');
+        if (saved) { words = JSON.parse(saved); }
+        renderList();
+    };
+
+    function save() {
+        localStorage.setItem('dictation_words', JSON.stringify(words));
+        renderList();
+    }
+
+    function renderList() {
+        const listDom = document.getElementById('word-list-dom');
+        listDom.innerHTML = '';
+        words.forEach((item, index) => {
+            const li = document.createElement('li');
+            li.className = 'word-item';
+            // 修改：HTML结构调整，拼音放在汉字前面，按钮组纵向排列
+            li.innerHTML = `
+                <div class="word-item-top">
+                    <!-- 左侧选框组 -->
+                    <div class="checkbox-wrapper" onclick="toggleRange(${index})" title="点击两个方框以选中中间所有词">
+                        <div class="range-checkbox ${rangeStartIndex === index ? 'active' : ''}"></div>
+                    </div>
+                    <div class="checkbox-wrapper" onclick="toggleCheck(${index})">
+                        <div class="custom-checkbox ${item.checked ? 'checked' : ''}"></div>
+                    </div>
+                    
+                    <!-- 中间内容：先拼音后汉字 -->
+                    <div class="word-content" onclick="toggleCheck(${index})">
+                        <div class="word-pinyin">${item.pinyin}</div>
+                        <div class="word-text">${item.text}</div>
+                    </div>
+                    
+                    <!-- 右侧按钮：纵向堆叠 -->
+                    <div class="action-btns">
+                        <div class="icon-btn" onclick="editWord(${index})">编辑</div>
+                        <div class="icon-btn" style="color:var(--danger-color); background:#fff0f0;" onclick="deleteWord(${index})">删除</div>
+                    </div>
+                </div>
+                ${item.lastTested ? `<div class="last-tested">上次测试: ${formatDate(item.lastTested)}</div>` : ''}
+            `;
+            listDom.appendChild(li);
+        });
+    }
+
+    // --- 自动生成拼音 ---
+    function autoGeneratePinyin() {
+        const wordInput = document.getElementById('new-word').value;
+        if(wordInput) {
+            const pinyinStr = pinyinPro.pinyin(wordInput);
+            document.getElementById('new-pinyin').value = pinyinStr;
+        } else {
+            document.getElementById('new-pinyin').value = '';
+        }
+    }
+
+    // --- 功能区 ---
+    function handleWordSubmit() {
+        const w = document.getElementById('new-word').value.trim();
+        const p = document.getElementById('new-pinyin').value.trim();
+        
+        if(!w) return alert('请输入词语');
+
+        if (editingIndex === -1) {
+            words.push({ id: Date.now(), text: w, pinyin: p || ' ', checked: true });
+        } else {
+            words[editingIndex].text = w;
+            words[editingIndex].pinyin = p;
+            cancelEdit();
+        }
+        
+        document.getElementById('new-word').value = '';
+        document.getElementById('new-pinyin').value = '';
+        save();
+    }
+
+    function editWord(index) {
+        editingIndex = index;
+        const item = words[index];
+        document.getElementById('new-word').value = item.text;
+        document.getElementById('new-pinyin').value = item.pinyin;
+        document.getElementById('submit-btn').innerText = "保存";
+        document.getElementById('cancel-btn').style.display = "inline-block";
+        document.getElementById('new-word').focus();
+        window.scrollTo(0,0);
+    }
+
+    function cancelEdit() {
+        editingIndex = -1;
+        document.getElementById('new-word').value = '';
+        document.getElementById('new-pinyin').value = '';
+        document.getElementById('submit-btn').innerText = "添加";
+        document.getElementById('cancel-btn').style.display = "none";
+    }
+
+    function deleteWord(index) {
+        if(editingIndex === index) {
+            return alert("请先取消编辑");
+        }
+        if(confirm('确定删除?')) {
+            words.splice(index, 1);
+            if(editingIndex > index) editingIndex--; 
+            save();
+        }
+    }
+
+    // --- 新增: 批量删除功能 ---
+    function deleteSelected() {
+        const count = words.filter(w => w.checked).length;
+        if(count === 0) return alert('请先勾选要删除的词语');
+        
+        if(confirm(`确定删除选中的 ${count} 个词语吗？`)) {
+            if(editingIndex !== -1) cancelEdit(); // 如果正在编辑，先退出编辑模式
+            words = words.filter(w => !w.checked);
+            rangeStartIndex = -1; // 重置区间选择
+            save();
+        }
+    }
+
+    function toggleCheck(index) {
+        words[index].checked = !words[index].checked;
+        save();
+    }
+
+    // 新增：处理区间选择逻辑
+    function toggleRange(index) {
+        // 如果还没有选择起点，或者点击的是当前的起点（取消起点）
+        if (rangeStartIndex === -1) {
+            rangeStartIndex = index;
+            renderList(); // 重新渲染以显示激活状态
+        } else if (rangeStartIndex === index) {
+            rangeStartIndex = -1; // 取消选择
+            renderList();
+        } else {
+            // 已有起点，且点击了不同的点 -> 执行批量选中
+            const start = Math.min(rangeStartIndex, index);
+            const end = Math.max(rangeStartIndex, index);
+            
+            // 检查范围内是否有未选中的
+            let hasUnchecked = false;
+            for (let i = start; i <= end; i++) {
+                if (!words[i].checked) {
+                    hasUnchecked = true;
+                    break;
+                }
+            }
+
+            // 逻辑: 如果范围内的词语有一个没有被选择(hasUnchecked为true)就全部选中(target=true). 
+            // 否则(说明都被选中了)就把所有词语取消选择(target=false)
+            const targetState = hasUnchecked;
+
+            // 应用状态
+            for (let i = start; i <= end; i++) {
+                words[i].checked = targetState;
+            }
+            
+            rangeStartIndex = -1; // 动作完成，重置
+            save(); // 保存并重新渲染
+        }
+    }
+
+    function selectAll() {
+        const allChecked = words.every(w => w.checked);
+        words.forEach(w => w.checked = !allChecked);
+        save();
+    }
+    
+    function clearWords() {
+        if(confirm('确定清空所有词语吗？')) {
+            words = [];
+            save();
+        }
+    }
+
+    // --- 新增: 复制文本 ---
+    function copyToClipboard() {
+        const textarea = document.getElementById('io-textarea');
+        textarea.select();
+        textarea.setSelectionRange(0, 99999); // 适配移动端
+        
+        // 尝试使用 Clipboard API，如果不支持则回退
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(textarea.value).then(() => {
+                alert('已复制到剪贴板');
+            }).catch(() => {
+                document.execCommand('copy'); // 回退方案
+                alert('已复制');
+            });
+        } else {
+            document.execCommand('copy'); // 回退方案
+            alert('已复制');
+        }
+    }
+
+    // --- 新增: 清空文本 ---
+    function clearTextarea() {
+        const textarea = document.getElementById('io-textarea');
+        textarea.value = '';
+        textarea.focus();
+    }
+
+    // 新增：从 Gitee 同步 JSON
+    function syncFromGitee() {
+        const url = 'https://gitee.com/Every_redis/filedown/raw/master/%E4%B8%89%E5%B9%B4%E7%BA%A7%E4%B8%8A%E5%AD%A6%E6%9C%9F%E8%AF%8D%E8%AF%AD.json';
+        const textarea = document.getElementById('io-textarea');
+        
+        textarea.value = '正在从 Gitee 获取数据...';
+        
+        fetch(url)
+            .then(response => {
+                if (!response.ok) throw new Error('网络请求失败');
+                return response.text();
+            })
+            .then(text => {
+                textarea.value = text;
+                alert('获取成功！请检查内容并点击"确认"完成导入。');
+            })
+            .catch(err => {
+                textarea.value = '';
+                alert('同步失败: ' + err.message);
+            });
+    }
+
+    function openModal(title, content, isImport) {
+        const modal = document.getElementById('io-modal');
+        modal.style.display = 'flex'; 
+        
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('io-textarea').value = content;
+        
+        // 获取按钮DOM
+        const actionBtn = document.getElementById('modal-action-btn');
+        const copyBtn = document.getElementById('copy-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const syncBtn = document.getElementById('sync-btn'); // 新增
+        const textarea = document.getElementById('io-textarea');
+
+        if(isImport) {
+            // 导入模式: 显示确认、清空、同步；隐藏复制
+            actionBtn.style.display = 'block';
+            clearBtn.style.display = 'block';
+            syncBtn.style.display = 'block'; // 显示同步按钮
+            copyBtn.style.display = 'none';
+            textarea.readOnly = false;
+        } else {
+            // 导出模式: 显示复制；隐藏确认、清空、同步
+            actionBtn.style.display = 'none';
+            clearBtn.style.display = 'none';
+            syncBtn.style.display = 'none'; // 隐藏同步按钮
+            copyBtn.style.display = 'block';
+            textarea.readOnly = true;
+            textarea.select();
+        }
+    }
+    
+    function closeModal() { document.getElementById('io-modal').style.display = 'none'; }
+    
+    function exportJson() {
+        // 修改：导出时包含 lastTested 字段
+        const exportData = words.map(w => ({ word: w.text, pinyin: w.pinyin, lastTested: w.lastTested }));
+        openModal('导出内容', JSON.stringify(exportData, null, 2), false);
+    }
+    
+    function importJson() { openModal('粘贴JSON', '', true); }
+
+    function confirmImport() {
+        try {
+            const raw = document.getElementById('io-textarea').value;
+            const data = JSON.parse(raw);
+            if(!Array.isArray(data)) throw new Error();
+            const newWords = data.map(i => ({
+                id: Date.now() + Math.random(),
+                text: i.word || i.text,
+                pinyin: i.pinyin || '',
+                checked: true,
+                lastTested: i.lastTested || null // 修改：导入时保留测试时间
+            })).filter(i => i.text);
+            
+            if(confirm('覆盖当前列表? 取消则追加。')) words = newWords;
+            else words = words.concat(newWords);
+            
+            save();
+            closeModal();
+        } catch(e) { alert('JSON格式错误'); }
+    }
+    
+    // 新增：格式化时间戳
+    function formatDate(timestamp) {
+        if (!timestamp) return '';
+        const d = new Date(timestamp);
+        const y = d.getFullYear();
+        const m = (d.getMonth() + 1);
+        const day = d.getDate();
+        const h = d.getHours().toString().padStart(2, '0');
+        const min = d.getMinutes().toString().padStart(2, '0');
+        const s = d.getSeconds().toString().padStart(2, '0');
+        return `${y}年${m}月${day}日${h}:${min}:${s}`;
+    }
+
+
+    // --- 听写功能 ---
+    function startDictation(mode) {
+        // 默认模式为 看拼音写词
+        const currentMode = mode || 'py2wd';
+        
+        const selected = words.filter(w => w.checked);
+        if(selected.length === 0) return alert('请先勾选');
+
+        // 新增：更新选中词语的测试时间
+        const now = Date.now();
+        words.forEach(w => {
+            if (w.checked) {
+                w.lastTested = now;
+            }
+        });
+        save();
+        renderList(); // 重新渲染列表以更新时间显示
+
+        const container = document.getElementById('dictation-area');
+        container.innerHTML = '';
+        
+        // 设置标题
+        document.getElementById('header-title').innerText = currentMode === 'wd2py' ? "听写: 看词写拼音" : "听写: 看拼音写词";
+        
+        const shuffled = [...selected].sort(() => Math.random() - 0.5);
+
+        shuffled.forEach(item => {
+            const card = document.createElement('div');
+            // 添加模式类名
+            card.className = `dictation-card mode-${currentMode}`;
+            card.onclick = function() { this.classList.toggle('revealed'); };
+            
+            // 尝试分割拼音和汉字以进行对齐
+            const chars = item.text.split('');
+            const pinyinArr = item.pinyin ? item.pinyin.trim().split(/\s+/) : [];
+            const isAligned = chars.length === pinyinArr.length;
+
+            let contentHtml = '';
+            
+            // 如果无法对齐（数量不一致），则在顶部显示完整拼音
+            if(!isAligned && item.pinyin) {
+                contentHtml += `<div class="dictation-pinyin">${item.pinyin}</div>`;
+            }
+
+            contentHtml += '<div class="tzg-row">';
+            chars.forEach((char, i) => {
+                const py = isAligned ? pinyinArr[i] : '';
+                contentHtml += `
+                    <div class="tzg-item">
+                        ${isAligned ? `<div class="tzg-pinyin">${py}</div>` : ''}
+                        <div class="tzg-box">
+                            <div class="tzg-char">${char}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            contentHtml += '</div>';
+
+            card.innerHTML = `
+                ${contentHtml}
+                <div class="hint">点击显示答案</div>
+            `;
+            container.appendChild(card);
+        });
+
+        document.getElementById('main-page').style.display = 'none';
+        document.getElementById('dictation-page').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+
+    function exitDictation() {
+        document.getElementById('dictation-page').style.display = 'none';
+        document.getElementById('main-page').style.display = 'block';
+        document.getElementById('header-title').innerText = "词语本";
+    }
+
+    function toggleAllAnswers() {
+        const cards = document.querySelectorAll('.dictation-card');
+        const anyHidden = Array.from(cards).some(c => !c.classList.contains('revealed'));
+        cards.forEach(c => {
+            if(anyHidden) c.classList.add('revealed');
+            else c.classList.remove('revealed');
+        });
+    }
+</script>
+
+</body>
+</html>
