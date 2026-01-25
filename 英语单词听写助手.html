@@ -462,6 +462,92 @@
             z-index: 10;
         }
 
+        /* 新增：搜索高亮动画 */
+        .highlight-card {
+            border: 2px solid var(--primary-color) !important;
+            animation: highlight-pulse 2s ease-out;
+            background-color: #fffde7 !important; /* 浅黄色背景 */
+        }
+        @keyframes highlight-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* 新增：搜索下拉列表样式 */
+        #search-drop-list {
+            position: absolute;
+            top: 100%; left: 0; right: 0;
+            background: #fff;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            max-height: 250px;
+            overflow-y: auto;
+            z-index: 1002;
+            margin-top: 2px;
+            padding: 0;
+            list-style: none;
+            border: 1px solid #eee;
+        }
+        .search-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f5f5f5;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .search-item:last-child { border-bottom: none; }
+        .search-item:hover { background: #f0f7ff; }
+        .search-en { font-weight: bold; color: var(--primary-color); font-size: 16px; }
+        .search-cn { color: #888; font-size: 13px; }
+
+        /* 新增：标签相关样式 */
+        .word-tags {
+            margin-top: 6px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .tag-badge {
+            font-size: 11px;
+            background: #f0f0f5; 
+            color: #666;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        
+        /* 标签筛选栏 */
+        .filter-bar {
+            display: flex;
+            overflow-x: auto;
+            gap: 8px;
+            padding: 5px 2px 10px 2px;
+            margin-bottom: 10px;
+            -webkit-overflow-scrolling: touch; /* iOS 平滑滚动 */
+            scrollbar-width: none; /* Firefox 隐藏滚动条 */
+        }
+        .filter-bar::-webkit-scrollbar { display: none; } /* Chrome 隐藏滚动条 */
+
+        .filter-chip {
+            flex: 0 0 auto;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: #fff;
+            border: 1px solid #e5e5ea;
+            font-size: 13px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .filter-chip.active {
+            background: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+            box-shadow: 0 2px 6px rgba(0,122,255,0.3);
+        }
+
     </style>
 </head>
 <body>
@@ -480,6 +566,11 @@
             <!-- 新增：翻译按钮 -->
             <button class="btn secondary" onclick="autoTranslate()" style="padding: 0 15px; font-size: 14px; white-space: nowrap;">翻译</button>
         </div>
+        <!-- 新增：标签输入框 -->
+        <div class="input-row">
+            <input type="text" id="new-tags" placeholder="标签 (例如: 第一单元 重点; 用空格分隔)">
+        </div>
+
         <div style="display: flex; gap: 10px;">
             <button class="btn block" style="flex:1" id="submit-btn" onclick="handleWordSubmit()">添加</button>
             <button class="btn secondary" id="cancel-btn" onclick="cancelEdit()" style="display:none; width: 80px;">取消</button>
@@ -501,6 +592,25 @@
         
         <div class="btn danger" onclick="deleteSelected()">删除选中</div>
         <div class="btn danger" onclick="clearWords()">清空全部</div>
+    </div>
+
+    <!-- 修改：搜索栏，增加下拉列表结构 -->
+    <div class="card" style="padding: 10px; position: relative; overflow: visible; z-index: 101; margin-bottom: 10px;">
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <input type="text" id="search-input" placeholder="输入单词或中文自动检索..." 
+                   style="flex:1; border:none; outline:none; font-size:16px; background:transparent;"
+                   onkeypress="if(event.keyCode===13) searchWord()"
+                   oninput="handleSearchInput()" 
+                   onfocus="handleSearchInput()" autocomplete="off">
+            <button class="btn" style="padding: 8px 15px; font-size: 14px;" onclick="searchWord()">Go</button>
+        </div>
+        <!-- 搜索结果下拉框 -->
+        <ul id="search-drop-list" style="display: none;"></ul>
+    </div>
+
+    <!-- 新增：标签筛选栏 -->
+    <div id="tag-filter-container" class="filter-bar">
+        <!-- JS 生成筛选按钮 -->
     </div>
 
     <ul class="word-list" id="word-list-dom">
@@ -592,15 +702,15 @@
 
 <script>
     // 默认数据
-    let words = [
-        { id: 1, text: "apple", pinyin: "苹果", checked: true },
-        { id: 2, text: "butterfly", pinyin: "蝴蝶", checked: true },
-        { id: 3, text: "delicious", pinyin: "美味的", checked: false }
+    let words = [ // 数据结构更新：增加 tags 字段
+        { id: 1, text: "apple", pinyin: "苹果", checked: true, tags: ["水果"] },
+        { id: 2, text: "butterfly", pinyin: "蝴蝶", checked: true, tags: ["动物", "昆虫"] },
+        { id: 3, text: "delicious", pinyin: "美味的", checked: false, tags: [] }
     ];
 
     let editingIndex = -1;
-    // 新增：记录区间选择的起始索引
     let rangeStartIndex = -1;
+    let currentFilterTag = null; // 新增：当前筛选的标签
     
     // 新增：音频映射表
     let audioMap = {};
@@ -761,18 +871,61 @@
         const listDom = document.getElementById('word-list-dom');
         listDom.innerHTML = '';
         
-        // 更新统计信息
-        const selectedCount = words.filter(w => w.checked).length;
-        document.getElementById('word-stats').innerText = `已选 ${selectedCount} / 共 ${words.length}`;
+        // 1. 生成标签筛选栏
+        const filterContainer = document.getElementById('tag-filter-container');
+        const allTags = new Set();
+        words.forEach(w => { if(w.tags && Array.isArray(w.tags)) w.tags.forEach(t => allTags.add(t)); });
+        
+        // logic: 字母倒排 + 数字正排 (解决 p6, p60, p7 乱序问题)
+        const sortedTags = Array.from(allTags).sort((a, b) => {
+            // 提取非数字部分比较 (字母倒排: b compare a)
+            const baseA = a.replace(/\d+/g, '');
+            const baseB = b.replace(/\d+/g, '');
+            const strCompare = baseB.localeCompare(baseA, 'zh-CN');
+            
+            // 如果非数字部分不同，直接返回倒排结果
+            if (strCompare !== 0) return strCompare;
+            
+            // 如果非数字部分相同 (例如 "Unit " 和 "Unit ")，则按包含数字的逻辑正排 (a compare b)
+            // numeric: true 选项可以智能识别字符串中的数字: "p6" < "p7" < "p60"
+            return a.localeCompare(b, 'zh-CN', { numeric: true });
+        });
+
+        // 只有当有标签时才显示 "全部" 按钮以外的内容
+        let filterHtml = `<div class="filter-chip ${currentFilterTag === null ? 'active' : ''}" onclick="applyTagFilter(null)">全部</div>`;
+        sortedTags.forEach(tag => {
+            filterHtml += `<div class="filter-chip ${currentFilterTag === tag ? 'active' : ''}" onclick="applyTagFilter('${tag}')">${tag}</div>`;
+        });
+        filterContainer.innerHTML = filterHtml;
+
+        // 更新统计信息 (如果没有筛选，显示总数；如果有筛选，显示筛选后数量)
+        // 注意：这里的checkedCount仍然是基于"当前显示列表"还是"全局"？
+        // 通常统计应反映可见内容。
+        
+        let visibleCount = 0;
+        let visibleChecked = 0;
 
         words.forEach((item, index) => {
+            // 新增：标签筛选逻辑
+            if (currentFilterTag && (!item.tags || !item.tags.includes(currentFilterTag))) {
+                return; // 跳过不符合标签的词
+            }
+
+            visibleCount++;
+            if(item.checked) visibleChecked++;
+
             const li = document.createElement('li');
             li.className = 'word-item';
+            li.id = 'word-item-' + index;
             
-            // 转义英文中的单引号，防止破坏 onclick 语法
             const safeText = item.text.replace(/'/g, "\\'");
 
-            // 修改：HTML结构调整，突出英文显示
+            // 新增：生成标签 HTML
+            let tagsHtml = '';
+            if (item.tags && item.tags.length > 0) {
+                tagsHtml = `<div class="word-tags">${item.tags.map(t => `<span class="tag-badge">${t}</span>`).join('')}</div>`;
+            }
+
             li.innerHTML = `
                 <div class="word-item-top">
                     <!-- 左侧选框组 -->
@@ -783,10 +936,11 @@
                         <div class="custom-checkbox ${item.checked ? 'checked' : ''}"></div>
                     </div>
                     
-                    <!-- 中间内容：上英文，下中文 -->
+                    <!-- 中间内容：上英文，下中文 + 标签 -->
                     <div class="word-content" onclick="toggleCheck(${index})">
                         <div class="word-pinyin" style="font-weight:600; font-size:18px; color:#000;">${item.text}</div>
                         <div class="word-text" style="font-size:14px; color:#666;">${item.pinyin}</div>
+                        ${tagsHtml}
                     </div>
                     
                     <!-- 右侧按钮：纵向堆叠 -->
@@ -801,7 +955,108 @@
             `;
             listDom.appendChild(li);
         });
+
+        // 刷新底部统计
+        document.getElementById('word-stats').innerText = `已选 ${visibleChecked} / 可见 ${visibleCount}`;
     }
+
+    // 新增：应用标签筛选
+    function applyTagFilter(tag) {
+        currentFilterTag = tag;
+        // 筛选时取消选择区间，防止逻辑混乱
+        rangeStartIndex = -1;
+        renderList();
+    }
+
+    // --- 新增：搜索定位功能 ---
+    function searchWord() {
+        const input = document.getElementById('search-input');
+        const term = input.value.trim().toLowerCase();
+        
+        if (!term) return alert("请输入搜索内容");
+
+        // 查找第一个匹配项
+        const index = words.findIndex(w => 
+            w.text.toLowerCase().includes(term) || 
+            w.pinyin.includes(term)
+        );
+
+        if (index !== -1) {
+            // 如果找到的词被标签过滤掉了，提示用户
+            if (currentFilterTag && (!words[index].tags || !words[index].tags.includes(currentFilterTag))) {
+                if(confirm('找到单词，但它不在当前标签筛选范围内。是否切换到"全部"以显示？')) {
+                    applyTagFilter(null); // 重置筛选
+                } else {
+                    return; // 用户取消
+                }
+            }
+            // 延时一点以确保 renderList 完成 (如果刚才重置了筛选)
+            setTimeout(() => jumpToWord(index), 50);
+            document.getElementById('search-drop-list').style.display = 'none'; 
+        } else {
+            alert("未找到相关单词");
+        }
+    }
+
+    // 新增：实时搜索处理
+    function handleSearchInput() {
+        const input = document.getElementById('search-input');
+        const dropList = document.getElementById('search-drop-list');
+        const term = input.value.trim().toLowerCase();
+        
+        if (!term) {
+            dropList.style.display = 'none';
+            return;
+        }
+
+        // 查找所有匹配项
+        const matches = words.map((w, idx) => ({ ...w, origIdx: idx }))
+            .filter(w => w.text.toLowerCase().includes(term) || w.pinyin.includes(term));
+
+        if (matches.length > 0) {
+            dropList.innerHTML = matches.map(m => `
+                <li class="search-item" onclick="jumpToWord(${m.origIdx})">
+                    <span class="search-en">${m.text.replace(/'/g, "&#39;")}</span>
+                    <span class="search-cn">${m.pinyin}</span>
+                </li>
+            `).join('');
+            dropList.style.display = 'block';
+        } else {
+            dropList.innerHTML = '<li style="padding:15px; color:#999; text-align:center;">无匹配结果</li>';
+            dropList.style.display = 'block';
+        }
+    }
+
+    // 新增：点击跳转并在列表中高亮
+    function jumpToWord(index) {
+        // 隐藏下拉列表
+        document.getElementById('search-drop-list').style.display = 'none';
+        
+        const targetEl = document.getElementById('word-item-' + index);
+        if (targetEl) {
+            // 滚动到视野中间
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // 触发高亮动画
+            targetEl.classList.remove('highlight-card');
+            void targetEl.offsetWidth; // 触发重绘
+            targetEl.classList.add('highlight-card');
+            
+            setTimeout(() => {
+                targetEl.classList.remove('highlight-card');
+            }, 2000);
+        }
+    }
+
+    // 新增：点击外部关闭搜索下拉
+    document.addEventListener('click', function(e) {
+        const input = document.getElementById('search-input');
+        const dropList = document.getElementById('search-drop-list');
+        // 如果点击的不是输入框 且 这里的dropList存在 且 点击不在列表中
+        if (input && dropList && e.target !== input && !dropList.contains(e.target)) {
+            dropList.style.display = 'none';
+        }
+    });
 
     // --- 新增：自动翻译功能 ---
     async function autoTranslate() {
@@ -842,23 +1097,27 @@
     function handleWordSubmit() {
         const w = document.getElementById('new-word').value.trim();
         const p = document.getElementById('new-pinyin').value.trim();
-        
+        const tStr = document.getElementById('new-tags').value.trim(); // 获取标签字符串
+
         if(!w) return alert('请输入单词');
+        
+        // 处理标签：按空格、逗号分隔，去重
+        const newTags = tStr ? [...new Set(tStr.split(/[\s,，]+/).filter(x => x))] : [];
 
         if (editingIndex === -1) {
-            // text存英文, pinyin存中文意思
-            words.push({ id: Date.now(), text: w, pinyin: p || ' ', checked: true });
-            // 新增：添加单词时自动朗读并尝试缓存
-            // 注意：如果遇到跨域限制(CORS)无法下载文件，代码会自动降级为直接播放URL
+            // 新增：包含 tags
+            words.push({ id: Date.now(), text: w, pinyin: p || ' ', checked: true, tags: newTags });
             speak(w);
         } else {
             words[editingIndex].text = w;
             words[editingIndex].pinyin = p;
+            words[editingIndex].tags = newTags; // 更新标签
             cancelEdit();
         }
         
         document.getElementById('new-word').value = '';
         document.getElementById('new-pinyin').value = '';
+        document.getElementById('new-tags').value = ''; // 清空标签框
         save();
     }
 
@@ -867,6 +1126,9 @@
         const item = words[index];
         document.getElementById('new-word').value = item.text;
         document.getElementById('new-pinyin').value = item.pinyin;
+        // 填充标签输入框
+        document.getElementById('new-tags').value = (item.tags || []).join(' '); 
+        
         document.getElementById('submit-btn').innerText = "保存";
         document.getElementById('cancel-btn').style.display = "inline-block";
         document.getElementById('new-word').focus();
@@ -877,6 +1139,7 @@
         editingIndex = -1;
         document.getElementById('new-word').value = '';
         document.getElementById('new-pinyin').value = '';
+        document.getElementById('new-tags').value = ''; // 清空标签
         document.getElementById('submit-btn').innerText = "添加";
         document.getElementById('cancel-btn').style.display = "none";
     }
@@ -1035,7 +1298,7 @@
         
         // 设置3秒超时
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        const timeoutId = setTimeout(() => controller.abort(), 30000);
 
         fetch(url, { signal: controller.signal })
             .then(response => {
@@ -1061,7 +1324,6 @@
     function openModal(title, content, isImport) {
         const modal = document.getElementById('io-modal');
         modal.style.display = 'flex'; 
-        
         document.getElementById('modal-title').innerText = title;
         document.getElementById('io-textarea').value = content;
         
@@ -1096,10 +1358,11 @@
     function closeModal() { document.getElementById('io-modal').style.display = 'none'; }
     
     function exportJson() {
-        // 修改：导出结构调整为 english (英文) 和 chinese (中文)，保留 lastTested
+        // 修改：导出结构包含 tags
         const exportData = words.map(w => ({ 
             english: w.text, 
             chinese: w.pinyin, 
+            tags: w.tags || [], // 导出标签
             lastTested: w.lastTested 
         }));
         openModal('导出内容', JSON.stringify(exportData, null, 2), false);
@@ -1117,8 +1380,9 @@
                 // 兼容 english/chinese 以及旧的 word/text/pinyin
                 text: i.english || i.word || i.text, 
                 pinyin: i.chinese || i.pinyin || '',
+                tags: i.tags || [], // 导入标签，没有则为空数组
                 checked: true,
-                lastTested: i.lastTested || null // 修改：导入时保留测试时间
+                lastTested: i.lastTested || null 
             })).filter(i => i.text);
             
             if(confirm('覆盖当前列表? 取消则追加。')) words = newWords;
@@ -1126,6 +1390,9 @@
             
             save();
             closeModal();
+            // 重置筛选
+            currentFilterTag = null; 
+            renderList();
         } catch(e) { alert('JSON格式错误'); }
     }
     
@@ -1175,7 +1442,6 @@
         shuffled.forEach(item => {
             const card = document.createElement('div');
             card.className = `dictation-card`; // 移除旧的 mode 类，使用统一逻辑
-            
             // 模式判断
             const isDictation = currentMode === 'dictation';
             // 显示内容：默写模式显示中文(item.pinyin)，展示模式显示英文(item.text)
