@@ -1,1181 +1,2770 @@
-[{
-		"word": "山坡",
-		"pinyin": "shān pō"
-	},
-	{
-		"word": "学校",
-		"pinyin": "xué xiào"
-	},
-	{
-		"word": "飘扬",
-		"pinyin": "piāo yáng"
-	},
-	{
-		"word": "课文",
-		"pinyin": "kè wén"
-	},
-	{
-		"word": "声音",
-		"pinyin": "shēng yīn"
-	},
-	{
-		"word": "招引",
-		"pinyin": "zhāo yǐn"
-	},
-	{
-		"word": "热闹",
-		"pinyin": "rè nào"
-	},
-	{
-		"word": "古老",
-		"pinyin": "gǔ lǎo"
-	},
-	{
-		"word": "粗壮",
-		"pinyin": "cū zhuàng"
-	},
-	{
-		"word": "枝干",
-		"pinyin": "zhī gàn"
-	},
-	{
-		"word": "洁白",
-		"pinyin": "jié bái"
-	},
-	{
-		"word": "皮球",
-		"pinyin": "pí qiú"
-	},
-	{
-		"word": "呼吸",
-		"pinyin": "hū xī"
-	},
-	{
-		"word": "读书",
-		"pinyin": "dú shū"
-	},
-	{
-		"word": "汗水",
-		"pinyin": "hàn shuǐ"
-	},
-	{
-		"word": "阿姨",
-		"pinyin": "ā yí"
-	},
-	{
-		"word": "孔雀",
-		"pinyin": "kǒng què"
-	},
-	{
-		"word": "欢唱",
-		"pinyin": "huān chàng"
-	},
-	{
-		"word": "好奇",
-		"pinyin": "hào qí"
-	},
-	{
-		"word": "轰响",
-		"pinyin": "hōng xiǎng"
-	},
-	{
-		"word": "阵雨",
-		"pinyin": "zhèn yǔ"
-	},
-	{
-		"word": "湿润",
-		"pinyin": "shī rùn"
-	},
-	{
-		"word": "风笛",
-		"pinyin": "fēng dí"
-	},
-	{
-		"word": "狂欢",
-		"pinyin": "kuáng huān"
-	},
-	{
-		"word": "觉得",
-		"pinyin": "jué de"
-	},
-	{
-		"word": "功课",
-		"pinyin": "gōng kè"
-	},
-	{
-		"word": "放学",
-		"pinyin": "fàng xué"
-	},
-	{
-		"word": "急急忙忙",
-		"pinyin": "jí jí máng máng"
-	},
-	{
-		"word": "老师",
-		"pinyin": "lǎo shī"
-	},
-	{
-		"word": "处罚",
-		"pinyin": "chǔ fá"
-	},
-	{
-		"word": "互相",
-		"pinyin": "hù xiāng"
-	},
-	{
-		"word": "碰触",
-		"pinyin": "pèng chù"
-	},
-	{
-		"word": "黄色",
-		"pinyin": "huáng sè"
-	},
-	{
-		"word": "秋风",
-		"pinyin": "qiū fēng"
-	},
-	{
-		"word": "放晴",
-		"pinyin": "fàng qíng"
-	},
-	{
-		"word": "明朗",
-		"pinyin": "míng lǎng"
-	},
-	{
-		"word": "地面",
-		"pinyin": "dì miàn"
-	},
-	{
-		"word": "亮晶晶",
-		"pinyin": "liàng jīng jīng"
-	},
-	{
-		"word": "落叶",
-		"pinyin": "luò yè"
-	},
-	{
-		"word": "图案",
-		"pinyin": "tú àn"
-	},
-	{
-		"word": "闪闪发光",
-		"pinyin": "shǎn shǎn fā guāng"
-	},
-	{
-		"word": "尽头",
-		"pinyin": "jìn tóu"
-	},
-	{
-		"word": "排列",
-		"pinyin": "pái liè"
-	},
-	{
-		"word": "规则",
-		"pinyin": "guī zé"
-	},
-	{
-		"word": "凌乱",
-		"pinyin": "líng luàn"
-	},
-	{
-		"word": "歌唱",
-		"pinyin": "gē chàng"
-	},
-	{
-		"word": "迟到",
-		"pinyin": "chí dào"
-	},
-	{
-		"word": "雨珠",
-		"pinyin": "yǔ zhū"
-	},
-	{
-		"word": "粘贴",
-		"pinyin": "zhān tiē"
-	},
-	{
-		"word": "印记",
-		"pinyin": "yìn jì"
-	},
-	{
-		"word": "平展",
-		"pinyin": "píng zhǎn"
-	},
-	{
-		"word": "秋天",
-		"pinyin": "qiū tiān"
-	},
-	{
-		"word": "清凉",
-		"pinyin": "qīng liáng"
-	},
-	{
-		"word": "炎热",
-		"pinyin": "yán rè"
-	},
-	{
-		"word": "枫树",
-		"pinyin": "fēng shù"
-	},
-	{
-		"word": "凉爽",
-		"pinyin": "liáng shuǎng"
-	},
-	{
-		"word": "果树",
-		"pinyin": "guǒ shù"
-	},
-	{
-		"word": "菊花",
-		"pinyin": "jú huā"
-	},
-	{
-		"word": "仙子",
-		"pinyin": "xiān zi"
-	},
-	{
-		"word": "频频",
-		"pinyin": "pín pín"
-	},
-	{
-		"word": "气味",
-		"pinyin": "qì wèi"
-	},
-	{
-		"word": "香甜",
-		"pinyin": "xiāng tián"
-	},
-	{
-		"word": "松果",
-		"pinyin": "sōng guǒ"
-	},
-	{
-		"word": "丰收",
-		"pinyin": "fēng shōu"
-	},
-	{
-		"word": "笔盒",
-		"pinyin": "bǐ hé"
-	},
-	{
-		"word": "银杏",
-		"pinyin": "yín xìng"
-	},
-	{
-		"word": "挤压",
-		"pinyin": "jǐ yā"
-	},
-	{
-		"word": "争斗",
-		"pinyin": "zhēng dòu"
-	},
-	{
-		"word": "勾住",
-		"pinyin": "gōu zhù"
-	},
-	{
-		"word": "告诉",
-		"pinyin": "gào sù"
-	},
-	{
-		"word": "挖洞",
-		"pinyin": "wā dòng"
-	},
-	{
-		"word": "一枚邮票",
-		"pinyin": "yī méi yóu piào"
-	},
-	{
-		"word": "门板",
-		"pinyin": "mén bǎn"
-	},
-	{
-		"word": "准备",
-		"pinyin": "zhǔn bèi"
-	},
-	{
-		"word": "旁边",
-		"pinyin": "páng biān"
-	},
-	{
-		"word": "暴风雨",
-		"pinyin": "bào fēng yǔ"
-	},
-	{
-		"word": "安心",
-		"pinyin": "ān xīn"
-	},
-	{
-		"word": "低头",
-		"pinyin": "dī tóu"
-	},
-	{
-		"word": "吃力",
-		"pinyin": "chī lì"
-	},
-	{
-		"word": "再见",
-		"pinyin": "zài jiàn"
-	},
-	{
-		"word": "母鸡",
-		"pinyin": "mǔ jī"
-	},
-	{
-		"word": "注意",
-		"pinyin": "zhù yì"
-	},
-	{
-		"word": "屋子",
-		"pinyin": "wū zi"
-	},
-	{
-		"word": "漂亮",
-		"pinyin": "piào liàng"
-	},
-	{
-		"word": "意思",
-		"pinyin": "yì si"
-	},
-	{
-		"word": "因此",
-		"pinyin": "yīn cǐ"
-	},
-	{
-		"word": "等待",
-		"pinyin": "děng dài"
-	},
-	{
-		"word": "钻研",
-		"pinyin": "zuān yán"
-	},
-	{
-		"word": "爬行",
-		"pinyin": "pá xíng"
-	},
-	{
-		"word": "晒太阳",
-		"pinyin": "shài tài yáng"
-	},
-	{
-		"word": "响起",
-		"pinyin": "xiǎng qǐ"
-	},
-	{
-		"word": "哦",
-		"pinyin": "ó"
-	},
-	{
-		"word": "砍光",
-		"pinyin": "kǎn guāng"
-	},
-	{
-		"word": "饥饿",
-		"pinyin": "jī è"
-	},
-	{
-		"word": "吃饱",
-		"pinyin": "chī bǎo"
-	},
-	{
-		"word": "恒心",
-		"pinyin": "héng xīn"
-	},
-	{
-		"word": "神圣",
-		"pinyin": "shén shèng"
-	},
-	{
-		"word": "萌发",
-		"pinyin": "méng fā"
-	},
-	{
-		"word": "妥当",
-		"pinyin": "tuǒ dàng"
-	},
-	{
-		"word": "车轴",
-		"pinyin": "chē zhóu"
-	},
-	{
-		"word": "阁楼",
-		"pinyin": "gé lóu"
-	},
-	{
-		"word": "培植",
-		"pinyin": "péi zhí"
-	},
-	{
-		"word": "厘米",
-		"pinyin": "lí mǐ"
-	},
-	{
-		"word": "火辣",
-		"pinyin": "huǒ là"
-	},
-	{
-		"word": "统一",
-		"pinyin": "tǒng yī"
-	},
-	{
-		"word": "图书馆",
-		"pinyin": "tú shū guǎn"
-	},
-	{
-		"word": "声明",
-		"pinyin": "shēng míng"
-	},
-	{
-		"word": "神仙",
-		"pinyin": "shén xiān"
-	},
-	{
-		"word": "普通",
-		"pinyin": "pǔ tōng"
-	},
-	{
-		"word": "让步",
-		"pinyin": "ràng bù"
-	},
-	{
-		"word": "条件",
-		"pinyin": "tiáo jiàn"
-	},
-	{
-		"word": "指甲",
-		"pinyin": "zhǐ jiǎ"
-	},
-	{
-		"word": "得到",
-		"pinyin": "dé dào"
-	},
-	{
-		"word": "衣服",
-		"pinyin": "yī fú"
-	},
-	{
-		"word": "所以",
-		"pinyin": "suǒ yǐ"
-	},
-	{
-		"word": "要是",
-		"pinyin": "yào shì"
-	},
-	{
-		"word": "同学",
-		"pinyin": "tóng xué"
-	},
-	{
-		"word": "可怜",
-		"pinyin": "kě lián"
-	},
-	{
-		"word": "最好",
-		"pinyin": "zuì hǎo"
-	},
-	{
-		"word": "科学",
-		"pinyin": "kē xué"
-	},
-	{
-		"word": "葫芦",
-		"pinyin": "hú lú"
-	},
-	{
-		"word": "错误",
-		"pinyin": "cuò wù"
-	},
-	{
-		"word": "龙宫",
-		"pinyin": "lóng gōng"
-	},
-	{
-		"word": "肯定冒险",
-		"pinyin": "kěn dìng mào xiǎn"
-	},
-	{
-		"word": "公式",
-		"pinyin": "gōng shì"
-	},
-	{
-		"word": "寒冷",
-		"pinyin": "hán lěng"
-	},
-	{
-		"word": "旅行",
-		"pinyin": "lǚ xíng"
-	},
-	{
-		"word": "要好",
-		"pinyin": "yào hǎo"
-	},
-	{
-		"word": "答应",
-		"pinyin": "dā yìng"
-	},
-	{
-		"word": "做梦",
-		"pinyin": "zuò mèng"
-	},
-	{
-		"word": "来得及",
-		"pinyin": "lái de jí"
-	},
-	{
-		"word": "救命",
-		"pinyin": "jiù mìng"
-	},
-	{
-		"word": "大吃一惊",
-		"pinyin": "dà chī yī jīng"
-	},
-	{
-		"word": "尾巴",
-		"pinyin": "wěi ba"
-	},
-	{
-		"word": "牙齿",
-		"pinyin": "yá chǐ"
-	},
-	{
-		"word": "肚皮",
-		"pinyin": "dù pí"
-	},
-	{
-		"word": "食物",
-		"pinyin": "shí wù"
-	},
-	{
-		"word": "消化",
-		"pinyin": "xiāo huà"
-	},
-	{
-		"word": "当然",
-		"pinyin": "dāng rán"
-	},
-	{
-		"word": "刚才",
-		"pinyin": "gāng cái"
-	},
-	{
-		"word": "知觉",
-		"pinyin": "zhī jué"
-	},
-	{
-		"word": "光亮",
-		"pinyin": "guāng liàng"
-	},
-	{
-		"word": "另外",
-		"pinyin": "lìng wài"
-	},
-	{
-		"word": "眼睛",
-		"pinyin": "yǎn jīng"
-	},
-	{
-		"word": "卷起",
-		"pinyin": "juǎn qǐ"
-	},
-	{
-		"word": "胃口",
-		"pinyin": "wèi kǒu"
-	},
-	{
-		"word": "管道",
-		"pinyin": "guǎn dào"
-	},
-	{
-		"word": "咬住",
-		"pinyin": "yǎo zhù"
-	},
-	{
-		"word": "咱们",
-		"pinyin": "zán men"
-	},
-	{
-		"word": "打扫",
-		"pinyin": "dǎ sǎo"
-	},
-	{
-		"word": "勇敢",
-		"pinyin": "yǒng gǎn"
-	},
-	{
-		"word": "出海",
-		"pinyin": "chū hǎi"
-	},
-	{
-		"word": "银光闪闪",
-		"pinyin": "yín guāng shǎn shǎn"
-	},
-	{
-		"word": "庭院",
-		"pinyin": "tíng yuàn"
-	},
-	{
-		"word": "亚热带",
-		"pinyin": "yà rè dài"
-	},
-	{
-		"word": "散发",
-		"pinyin": "sàn fā"
-	},
-	{
-		"word": "打扫",
-		"pinyin": "dǎ sǎo"
-	},
-	{
-		"word": "干净",
-		"pinyin": "gān jìng"
-	},
-	{
-		"word": "棕树",
-		"pinyin": "zōng shù"
-	},
-	{
-		"word": "灰色",
-		"pinyin": "huī sè"
-	},
-	{
-		"word": "紧跟",
-		"pinyin": "jǐn gēn"
-	},
-	{
-		"word": "踩水",
-		"pinyin": "cǎi shuǐ"
-	},
-	{
-		"word": "透明",
-		"pinyin": "tòu míng"
-	},
-	{
-		"word": "除法",
-		"pinyin": "chú fǎ"
-	},
-	{
-		"word": "东北",
-		"pinyin": "dōng běi"
-	},
-	{
-		"word": "密密层层",
-		"pinyin": "mì mì céng céng"
-	},
-	{
-		"word": "严严实实",
-		"pinyin": "yán yán shí shí"
-	},
-	{
-		"word": "视线",
-		"pinyin": "shì xiàn"
-	},
-	{
-		"word": "山谷",
-		"pinyin": "shān gǔ"
-	},
-	{
-		"word": "起来",
-		"pinyin": "qǐ lái"
-	},
-	{
-		"word": "照射",
-		"pinyin": "zhào shè"
-	},
-	{
-		"word": "花坛",
-		"pinyin": "huā tán"
-	},
-	{
-		"word": "各种各样",
-		"pinyin": "gè zhǒng gè yàng"
-	},
-	{
-		"word": "显得",
-		"pinyin": "xiǎn de"
-	},
-	{
-		"word": "苍翠",
-		"pinyin": "cāng cuì"
-	},
-	{
-		"word": "药材",
-		"pinyin": "yào cái"
-	},
-	{
-		"word": "捕捉",
-		"pinyin": "bǔ zhuō"
-	},
-	{
-		"word": "野兔",
-		"pinyin": "yě tù"
-	},
-	{
-		"word": "景色",
-		"pinyin": "jǐng sè"
-	},
-	{
-		"word": "宝库",
-		"pinyin": "bǎo kù"
-	},
-	{
-		"word": "抽芽",
-		"pinyin": "chōu yá"
-	},
-	{
-		"word": "封口",
-		"pinyin": "fēng kǒu"
-	},
-	{
-		"word": "挡住",
-		"pinyin": "dǎng zhù"
-	},
-	{
-		"word": "松软",
-		"pinyin": "sōng ruǎn"
-	},
-	{
-		"word": "刮风",
-		"pinyin": "guā fēng"
-	},
-	{
-		"word": "大自然的声音",
-		"pinyin": "dà zì rán de shēng yīn"
-	},
-	{
-		"word": "大自然",
-		"pinyin": "dà zì rán"
-	},
-	{
-		"word": "美妙",
-		"pinyin": "měi miào"
-	},
-	{
-		"word": "音乐家",
-		"pinyin": "yīn yuè jiā"
-	},
-	{
-		"word": "手风琴",
-		"pinyin": "shǒu fēng qín"
-	},
-	{
-		"word": "歌手",
-		"pinyin": "gē shǒu"
-	},
-	{
-		"word": "感受",
-		"pinyin": "gǎn shòu"
-	},
-	{
-		"word": "温柔",
-		"pinyin": "wēn róu"
-	},
-	{
-		"word": "合奏",
-		"pinyin": "hé zòu"
-	},
-	{
-		"word": "充满",
-		"pinyin": "chōng mǎn"
-	},
-	{
-		"word": "威力",
-		"pinyin": "wēi lì"
-	},
-	{
-		"word": "乐器",
-		"pinyin": "yuè qì"
-	},
-	{
-		"word": "屋顶",
-		"pinyin": "wū dǐng"
-	},
-	{
-		"word": "河流",
-		"pinyin": "hé liú"
-	},
-	{
-		"word": "轻快",
-		"pinyin": "qīng kuài"
-	},
-	{
-		"word": "合唱",
-		"pinyin": "hé chàng"
-	},
-	{
-		"word": "水塘",
-		"pinyin": "shuǐ táng"
-	},
-	{
-		"word": "汇合",
-		"pinyin": "huì hé"
-	},
-	{
-		"word": "鸣叫",
-		"pinyin": "míng jiào"
-	},
-	{
-		"word": "昆虫",
-		"pinyin": "kūn chóng"
-	},
-	{
-		"word": "万物",
-		"pinyin": "wàn wù"
-	},
-	{
-		"word": "沉思",
-		"pinyin": "chén sī"
-	},
-	{
-		"word": "搬家",
-		"pinyin": "bān jiā"
-	},
-	{
-		"word": "井然有序",
-		"pinyin": "jǐng rán yǒu xù"
-	},
-	{
-		"word": "精神",
-		"pinyin": "jīng shén"
-	},
-	{
-		"word": "植物",
-		"pinyin": "zhí wù"
-	},
-	{
-		"word": "鲜美",
-		"pinyin": "xiān měi"
-	},
-	{
-		"word": "池塘",
-		"pinyin": "chí táng"
-	},
-	{
-		"word": "千姿百态",
-		"pinyin": "qiān zī bǎi tài"
-	},
-	{
-		"word": "秋高气爽",
-		"pinyin": "qiū gāo qì shuǎng"
-	},
-	{
-		"word": "倒映",
-		"pinyin": "dào yìng"
-	},
-	{
-		"word": "游玩",
-		"pinyin": "yóu wán"
-	},
-	{
-		"word": "画册",
-		"pinyin": "huà cè"
-	},
-	{
-		"word": "无穷",
-		"pinyin": "wú qióng"
-	},
-	{
-		"word": "奥秘",
-		"pinyin": "ào mì"
-	},
-	{
-		"word": "无尽",
-		"pinyin": "wú jìn"
-	},
-	{
-		"word": "龙虾",
-		"pinyin": "lóng xiā"
-	},
-	{
-		"word": "仅有",
-		"pinyin": "jǐn yǒu"
-	},
-	{
-		"word": "光荣",
-		"pinyin": "guāng róng"
-	},
-	{
-		"word": "干枯",
-		"pinyin": "gān kū"
-	},
-	{
-		"word": "鱼刺",
-		"pinyin": "yú cì"
-	},
-	{
-		"word": "梨树",
-		"pinyin": "lí shù"
-	},
-	{
-		"word": "部分",
-		"pinyin": "bù fèn"
-	},
-	{
-		"word": "世界",
-		"pinyin": "shì jiè"
-	},
-	{
-		"word": "书册",
-		"pinyin": "shū cè"
-	},
-	{
-		"word": "忠诚",
-		"pinyin": "zhōng chéng"
-	},
-	{
-		"word": "飞鸟",
-		"pinyin": "fēi niǎo"
-	},
-	{
-		"word": "田螺",
-		"pinyin": "tián luó"
-	},
-	{
-		"word": "螃蟹",
-		"pinyin": "páng xiè"
-	},
-	{
-		"word": "鲤鱼",
-		"pinyin": "lǐ yú"
-	},
-	{
-		"word": "鲫鱼",
-		"pinyin": "jì yú"
-	},
-	{
-		"word": "鲨鱼",
-		"pinyin": "shā yú"
-	},
-	{
-		"word": "一定要争气",
-		"pinyin": "yí dìng yào zhēng qì"
-	},
-	{
-		"word": "生物",
-		"pinyin": "shēng wù"
-	},
-	{
-		"word": "从事",
-		"pinyin": "cóng shì"
-	},
-	{
-		"word": "成就",
-		"pinyin": "chéng jiù"
-	},
-	{
-		"word": "学期",
-		"pinyin": "xué qī"
-	},
-	{
-		"word": "考试",
-		"pinyin": "kǎo shì"
-	},
-	{
-		"word": "再三",
-		"pinyin": "zài sān"
-	},
-	{
-		"word": "同意",
-		"pinyin": "tóng yì"
-	},
-	{
-		"word": "难得",
-		"pinyin": "nán dé"
-	},
-	{
-		"word": "值班",
-		"pinyin": "zhí bān"
-	},
-	{
-		"word": "努力",
-		"pinyin": "nǔ lì"
-	},
-	{
-		"word": "留学",
-		"pinyin": "liú xué"
-	},
-	{
-		"word": "国家",
-		"pinyin": "guó jiā"
-	},
-	{
-		"word": "落后",
-		"pinyin": "luò hòu"
-	},
-	{
-		"word": "地位",
-		"pinyin": "dì wèi"
-	},
-	{
-		"word": "环节",
-		"pinyin": "huán jié"
-	},
-	{
-		"word": "难度",
-		"pinyin": "nán dù"
-	},
-	{
-		"word": "刻苦",
-		"pinyin": "kè kǔ"
-	},
-	{
-		"word": "兴奋",
-		"pinyin": "xīng fèn"
-	},
-	{
-		"word": "思念",
-		"pinyin": "sī niàn"
-	},
-	{
-		"word": "差别",
-		"pinyin": "chā bié"
-	},
-	{
-		"word": "平均",
-		"pinyin": "píng jūn"
-	},
-	{
-		"word": "退步",
-		"pinyin": "tuì bù"
-	},
-	{
-		"word": "单一",
-		"pinyin": "dān yī"
-	},
-	{
-		"word": "巧合",
-		"pinyin": "qiǎo hé"
-	},
-	{
-		"word": "更加",
-		"pinyin": "gèng jiā"
-	},
-	{
-		"word": "手术台就是阵地",
-		"pinyin": "shǒu shù tái jiù shì zhèn dì"
-	},
-	{
-		"word": "手术台",
-		"pinyin": "shǒu shù tái"
-	},
-	{
-		"word": "阵地",
-		"pinyin": "zhèn dì"
-	},
-	{
-		"word": "战斗",
-		"pinyin": "zhàn dòu"
-	},
-	{
-		"word": "打响",
-		"pinyin": "dǎ xiǎng"
-	},
-	{
-		"word": "消灭",
-		"pinyin": "xiāo miè"
-	},
-	{
-		"word": "伤员",
-		"pinyin": "shāng yuán"
-	},
-	{
-		"word": "陆续",
-		"pinyin": "lù xù"
-	},
-	{
-		"word": "血丝",
-		"pinyin": "xuè sī"
-	},
-	{
-		"word": "匆匆",
-		"pinyin": "cōng cōng"
-	},
-	{
-		"word": "医生",
-		"pinyin": "yī shēng"
-	},
-	{
-		"word": "转告",
-		"pinyin": "zhuǎn gào"
-	},
-	{
-		"word": "赶忙",
-		"pinyin": "gǎn máng"
-	},
-	{
-		"word": "迅速",
-		"pinyin": "xùn sù"
-	},
-	{
-		"word": "争分夺秒",
-		"pinyin": "zhēng fēn duó miǎo"
-	},
-	{
-		"word": "连续",
-		"pinyin": "lián xù"
-	},
-	{
-		"word": "木棒",
-		"pinyin": "mù bàng"
-	},
-	{
-		"word": "夺取",
-		"pinyin": "duó qǔ"
-	},
-	{
-		"word": "盘子",
-		"pinyin": "pán zi"
-	},
-	{
-		"word": "需要",
-		"pinyin": "xū yào"
-	},
-	{
-		"word": "敌人",
-		"pinyin": "dí rén"
-	},
-	{
-		"word": "抬头",
-		"pinyin": "tái tóu"
-	},
-	{
-		"word": "仍然",
-		"pinyin": "réng rán"
-	},
-	{
-		"word": "继续",
-		"pinyin": "jì xù"
-	},
-	{
-		"word": "怒目圆睁",
-		"pinyin": "nù mù yuán zhēng"
-	},
-	{
-		"word": "眨眼",
-		"pinyin": "zhǎ yǎn"
-	},
-	{
-		"word": "眼眶",
-		"pinyin": "yǎn kuàng"
-	},
-	{
-		"word": "目瞪口呆",
-		"pinyin": "mù dèng kǒu dāi"
-	},
-	{
-		"word": "耳闻目睹",
-		"pinyin": "ěr wén mù dǔ"
-	},
-	{
-		"word": "睡觉",
-		"pinyin": "shuì jiào"
-	},
-	{
-		"word": "眉毛",
-		"pinyin": "méi máo"
-	},
-	{
-		"word": "石油",
-		"pinyin": "shí yóu"
-	}
+[
+    {
+        "word": "山坡",
+        "pinyin": "shān pō",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 1 课"
+        ]
+    },
+    {
+        "word": "学校",
+        "pinyin": "xué xiào",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 1 课"
+        ]
+    },
+    {
+        "word": "飘扬",
+        "pinyin": "piāo yáng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 1 课"
+        ]
+    },
+    {
+        "word": "课文",
+        "pinyin": "kè wén",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 1 课"
+        ]
+    },
+    {
+        "word": "声音",
+        "pinyin": "shēng yīn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 1 课"
+        ]
+    },
+    {
+        "word": "招引",
+        "pinyin": "zhāo yǐn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 1 课"
+        ]
+    },
+    {
+        "word": "热闹",
+        "pinyin": "rè nao",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 1 课"
+        ]
+    },
+    {
+        "word": "古老",
+        "pinyin": "gǔ lǎo",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 1 课"
+        ]
+    },
+    {
+        "word": "粗壮",
+        "pinyin": "cū zhuàng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 1 课"
+        ]
+    },
+    {
+        "word": "枝干",
+        "pinyin": "zhī gàn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 1 课"
+        ]
+    },
+    {
+        "word": "洁白",
+        "pinyin": "jié bái",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 1 课"
+        ]
+    },
+    {
+        "word": "轰响",
+        "pinyin": "hōng xiǎng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 2 课"
+        ]
+    },
+    {
+        "word": "阵雨",
+        "pinyin": "zhèn yǔ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 2 课"
+        ]
+    },
+    {
+        "word": "湿润",
+        "pinyin": "shī rùn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 2 课"
+        ]
+    },
+    {
+        "word": "风笛",
+        "pinyin": "fēng dí",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 2 课"
+        ]
+    },
+    {
+        "word": "狂欢",
+        "pinyin": "kuáng huān",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 2 课"
+        ]
+    },
+    {
+        "word": "觉得",
+        "pinyin": "jué de",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 2 课"
+        ]
+    },
+    {
+        "word": "功课",
+        "pinyin": "gōng kè",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 2 课"
+        ]
+    },
+    {
+        "word": "放学",
+        "pinyin": "fàng xué",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 2 课"
+        ]
+    },
+    {
+        "word": "老师",
+        "pinyin": "lǎo shī",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 2 课"
+        ]
+    },
+    {
+        "word": "急急忙忙",
+        "pinyin": "jí jí máng máng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 2 课"
+        ]
+    },
+    {
+        "word": "秋风",
+        "pinyin": "qiū fēng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 5 课"
+        ]
+    },
+    {
+        "word": "放晴",
+        "pinyin": "fàng qíng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 5 课"
+        ]
+    },
+    {
+        "word": "明朗",
+        "pinyin": "míng lǎng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 5 课"
+        ]
+    },
+    {
+        "word": "地面",
+        "pinyin": "dì miàn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 5 课"
+        ]
+    },
+    {
+        "word": "亮晶晶",
+        "pinyin": "liàng jīng jīng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 5 课"
+        ]
+    },
+    {
+        "word": "落叶",
+        "pinyin": "luò yè",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 5 课"
+        ]
+    },
+    {
+        "word": "图案",
+        "pinyin": "tú àn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 5 课"
+        ]
+    },
+    {
+        "word": "闪闪发光",
+        "pinyin": "shǎn shǎn fā guāng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 5 课"
+        ]
+    },
+    {
+        "word": "尽头",
+        "pinyin": "jìn tóu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 5 课"
+        ]
+    },
+    {
+        "word": "排列",
+        "pinyin": "pái liè",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 5 课"
+        ]
+    },
+    {
+        "word": "规则",
+        "pinyin": "guī zé",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 5 课"
+        ]
+    },
+    {
+        "word": "凌乱",
+        "pinyin": "líng luàn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 5 课"
+        ]
+    },
+    {
+        "word": "歌唱",
+        "pinyin": "gē chàng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 5 课"
+        ]
+    },
+    {
+        "word": "迟到",
+        "pinyin": "chí dào",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 5 课"
+        ]
+    },
+    {
+        "word": "秋天",
+        "pinyin": "qiū tiān",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 6 课"
+        ]
+    },
+    {
+        "word": "清凉",
+        "pinyin": "qīng liáng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 6 课"
+        ]
+    },
+    {
+        "word": "炎热",
+        "pinyin": "yán rè",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 6 课"
+        ]
+    },
+    {
+        "word": "枫树",
+        "pinyin": "fēng shù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 6 课"
+        ]
+    },
+    {
+        "word": "邮票",
+        "pinyin": "yóu piào",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 6 课"
+        ]
+    },
+    {
+        "word": "凉爽",
+        "pinyin": "liáng shuǎng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 6 课"
+        ]
+    },
+    {
+        "word": "果树",
+        "pinyin": "guǒ shù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 6 课"
+        ]
+    },
+    {
+        "word": "菊花",
+        "pinyin": "jú huā",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 6 课"
+        ]
+    },
+    {
+        "word": "仙子",
+        "pinyin": "xiān zǐ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 6 课"
+        ]
+    },
+    {
+        "word": "频频",
+        "pinyin": "pín pín",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 6 课"
+        ]
+    },
+    {
+        "word": "气味",
+        "pinyin": "qì wèi",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 6 课"
+        ]
+    },
+    {
+        "word": "香甜",
+        "pinyin": "xiāng tián",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 6 课"
+        ]
+    },
+    {
+        "word": "松果",
+        "pinyin": "sōng guǒ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 6 课"
+        ]
+    },
+    {
+        "word": "丰收",
+        "pinyin": "fēng shōu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 6 课"
+        ]
+    },
+    {
+        "word": "门板",
+        "pinyin": "mén bǎn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "准备",
+        "pinyin": "zhǔn bèi",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "旁边",
+        "pinyin": "páng biān",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "暴风雨",
+        "pinyin": "bào fēng yǔ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "安心",
+        "pinyin": "ān xīn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "低头",
+        "pinyin": "dī tóu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "吃力",
+        "pinyin": "chī lì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "再见",
+        "pinyin": "zài jiàn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "母鸡",
+        "pinyin": "mǔ jī",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "注意",
+        "pinyin": "zhù yì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "屋子",
+        "pinyin": "wū zi",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "漂亮",
+        "pinyin": "piào liang",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "意思",
+        "pinyin": "yì si",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "因此",
+        "pinyin": "yīn cǐ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "恒心",
+        "pinyin": "héng xīn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "神圣",
+        "pinyin": "shén shèng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "萌发",
+        "pinyin": "méng fā",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "妥当",
+        "pinyin": "tuǒ dàng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "车轴",
+        "pinyin": "chē zhóu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "阁楼",
+        "pinyin": "gé lóu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "培植",
+        "pinyin": "péi zhí",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "厘米",
+        "pinyin": "lí mǐ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 8 课"
+        ]
+    },
+    {
+        "word": "声明",
+        "pinyin": "shēng míng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 11 课"
+        ]
+    },
+    {
+        "word": "神仙",
+        "pinyin": "shén xiān",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 11 课"
+        ]
+    },
+    {
+        "word": "普通",
+        "pinyin": "pǔ tōng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 11 课"
+        ]
+    },
+    {
+        "word": "让步",
+        "pinyin": "ràng bù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 11 课"
+        ]
+    },
+    {
+        "word": "条件",
+        "pinyin": "tiáo jiàn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 11 课"
+        ]
+    },
+    {
+        "word": "指甲",
+        "pinyin": "zhǐ jia",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 11 课"
+        ]
+    },
+    {
+        "word": "得到",
+        "pinyin": "dé dào",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 11 课"
+        ]
+    },
+    {
+        "word": "衣服",
+        "pinyin": "yī fu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 11 课"
+        ]
+    },
+    {
+        "word": "所以",
+        "pinyin": "suǒ yǐ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 11 课"
+        ]
+    },
+    {
+        "word": "要是",
+        "pinyin": "yào shì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 11 课"
+        ]
+    },
+    {
+        "word": "同学",
+        "pinyin": "tóng xué",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 11 课"
+        ]
+    },
+    {
+        "word": "可怜",
+        "pinyin": "kě lián",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 11 课"
+        ]
+    },
+    {
+        "word": "最好",
+        "pinyin": "zuì hǎo",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 11 课"
+        ]
+    },
+    {
+        "word": "科学",
+        "pinyin": "kē xué",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 11 课"
+        ]
+    },
+    {
+        "word": "旅行",
+        "pinyin": "lǚ xíng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 12 课"
+        ]
+    },
+    {
+        "word": "要好",
+        "pinyin": "yào hǎo",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 12 课"
+        ]
+    },
+    {
+        "word": "答应",
+        "pinyin": "dā ying",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 12 课"
+        ]
+    },
+    {
+        "word": "做梦",
+        "pinyin": "zuò mèng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 12 课"
+        ]
+    },
+    {
+        "word": "来得及",
+        "pinyin": "lái de jí",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 12 课"
+        ]
+    },
+    {
+        "word": "救命",
+        "pinyin": "jiù mìng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 12 课"
+        ]
+    },
+    {
+        "word": "大吃一惊",
+        "pinyin": "dà chī yī jīng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 13 课"
+        ]
+    },
+    {
+        "word": "尾巴",
+        "pinyin": "wěi ba",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 13 课"
+        ]
+    },
+    {
+        "word": "牙齿",
+        "pinyin": "yá chǐ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 13 课"
+        ]
+    },
+    {
+        "word": "肚皮",
+        "pinyin": "dù pí",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 13 课"
+        ]
+    },
+    {
+        "word": "食物",
+        "pinyin": "shí wù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 13 课"
+        ]
+    },
+    {
+        "word": "消化",
+        "pinyin": "xiāo huà",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 13 课"
+        ]
+    },
+    {
+        "word": "当然",
+        "pinyin": "dāng rán",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 13 课"
+        ]
+    },
+    {
+        "word": "刚才",
+        "pinyin": "gāng cái",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 13 课"
+        ]
+    },
+    {
+        "word": "知觉",
+        "pinyin": "zhī jué",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 13 课"
+        ]
+    },
+    {
+        "word": "光亮",
+        "pinyin": "guāng liàng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 13 课"
+        ]
+    },
+    {
+        "word": "申请",
+        "pinyin": "shēn qǐng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 13 课"
+        ]
+    },
+    {
+        "word": "介绍",
+        "pinyin": "jiè shào",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 13 课"
+        ]
+    },
+    {
+        "word": "主旨",
+        "pinyin": "zhǔ zhǐ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 13 课"
+        ]
+    },
+    {
+        "word": "占领",
+        "pinyin": "zhàn lǐng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 13 课"
+        ]
+    },
+    {
+        "word": "乏力",
+        "pinyin": "fá lì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 13 课"
+        ]
+    },
+    {
+        "word": "母亲",
+        "pinyin": "mǔ qīn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 14 课"
+        ]
+    },
+    {
+        "word": "外祖父",
+        "pinyin": "wài zǔ fù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 14 课"
+        ]
+    },
+    {
+        "word": "船夫",
+        "pinyin": "chuán fū",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 14 课"
+        ]
+    },
+    {
+        "word": "羽毛",
+        "pinyin": "yǔ máo",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 14 课"
+        ]
+    },
+    {
+        "word": "翠绿",
+        "pinyin": "cuì lǜ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 14 课"
+        ]
+    },
+    {
+        "word": "静悄悄",
+        "pinyin": "jìng qiāo qiāo",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 14 课"
+        ]
+    },
+    {
+        "word": "翠鸟",
+        "pinyin": "cuì niǎo",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 14 课"
+        ]
+    },
+    {
+        "word": "捕鱼",
+        "pinyin": "bǔ yú",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 14 课"
+        ]
+    },
+    {
+        "word": "搭船",
+        "pinyin": "dā chuán",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 14 课"
+        ]
+    },
+    {
+        "word": "草地",
+        "pinyin": "cǎo dì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 15 课"
+        ]
+    },
+    {
+        "word": "蒲公英",
+        "pinyin": "pú gōng yīng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 15 课"
+        ]
+    },
+    {
+        "word": "盛开",
+        "pinyin": "shèng kāi",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 15 课"
+        ]
+    },
+    {
+        "word": "玩耍",
+        "pinyin": "wán shuǎ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 15 课"
+        ]
+    },
+    {
+        "word": "一本正经",
+        "pinyin": "yī běn zhèng jīng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 15 课"
+        ]
+    },
+    {
+        "word": "使劲",
+        "pinyin": "shǐ jìn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 15 课"
+        ]
+    },
+    {
+        "word": "钓鱼",
+        "pinyin": "diào yú",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 15 课"
+        ]
+    },
+    {
+        "word": "观察",
+        "pinyin": "guān chá",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 15 课"
+        ]
+    },
+    {
+        "word": "合拢",
+        "pinyin": "hé lǒng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 15 课"
+        ]
+    },
+    {
+        "word": "张开",
+        "pinyin": "zhāng kāi",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 15 课"
+        ]
+    },
+    {
+        "word": "喜爱",
+        "pinyin": "xǐ ài",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 15 课"
+        ]
+    },
+    {
+        "word": "摇动",
+        "pinyin": "yáo dòng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 15 课"
+        ]
+    },
+    {
+        "word": "风景",
+        "pinyin": "fēng jǐng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 16 课"
+        ]
+    },
+    {
+        "word": "优美",
+        "pinyin": "yōu měi",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 16 课"
+        ]
+    },
+    {
+        "word": "物产",
+        "pinyin": "wù chǎn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 16 课"
+        ]
+    },
+    {
+        "word": "交错",
+        "pinyin": "jiāo cuò",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 16 课"
+        ]
+    },
+    {
+        "word": "岩石",
+        "pinyin": "yán shí",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 16 课"
+        ]
+    },
+    {
+        "word": "鹿角",
+        "pinyin": "lù jiǎo",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 16 课"
+        ]
+    },
+    {
+        "word": "成群结队",
+        "pinyin": "chéng qún jié duì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 16 课"
+        ]
+    },
+    {
+        "word": "布满",
+        "pinyin": "bù mǎn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 16 课"
+        ]
+    },
+    {
+        "word": "条纹",
+        "pinyin": "tiáo wén",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 16 课"
+        ]
+    },
+    {
+        "word": "周身",
+        "pinyin": "zhōu shēn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 16 课"
+        ]
+    },
+    {
+        "word": "皮球",
+        "pinyin": "pí qiú",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 16 课"
+        ]
+    },
+    {
+        "word": "茂密",
+        "pinyin": "mào mì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 16 课"
+        ]
+    },
+    {
+        "word": "肥料",
+        "pinyin": "féi liào",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 16 课"
+        ]
+    },
+    {
+        "word": "祖国",
+        "pinyin": "zǔ guó",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 16 课"
+        ]
+    },
+    {
+        "word": "事业",
+        "pinyin": "shì yè",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 16 课"
+        ]
+    },
+    {
+        "word": "发展",
+        "pinyin": "fā zhǎn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 16 课"
+        ]
+    },
+    {
+        "word": "海滨",
+        "pinyin": "hǎi bīn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 17 课"
+        ]
+    },
+    {
+        "word": "街道",
+        "pinyin": "jiē dào",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 17 课"
+        ]
+    },
+    {
+        "word": "交界",
+        "pinyin": "jiāo jiè",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 17 课"
+        ]
+    },
+    {
+        "word": "水平线",
+        "pinyin": "shuǐ píng xiàn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 17 课"
+        ]
+    },
+    {
+        "word": "机帆船",
+        "pinyin": "jī fān chuán",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 17 课"
+        ]
+    },
+    {
+        "word": "来来往往",
+        "pinyin": "lái lái wǎng wǎng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 17 课"
+        ]
+    },
+    {
+        "word": "朝阳",
+        "pinyin": "zhāo yáng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 17 课"
+        ]
+    },
+    {
+        "word": "渔民",
+        "pinyin": "yú mín",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 17 课"
+        ]
+    },
+    {
+        "word": "贝壳",
+        "pinyin": "bèi ké",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 17 课"
+        ]
+    },
+    {
+        "word": "汽笛",
+        "pinyin": "qì dí",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 17 课"
+        ]
+    },
+    {
+        "word": "出海",
+        "pinyin": "chū hǎi",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 17 课"
+        ]
+    },
+    {
+        "word": "银光闪闪",
+        "pinyin": "yín guāng shǎn shǎn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 17 课"
+        ]
+    },
+    {
+        "word": "庭院",
+        "pinyin": "tíng yuàn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 17 课"
+        ]
+    },
+    {
+        "word": "亚热带",
+        "pinyin": "yà rè dài",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 17 课"
+        ]
+    },
+    {
+        "word": "散发",
+        "pinyin": "sàn fā",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 17 课"
+        ]
+    },
+    {
+        "word": "打扫",
+        "pinyin": "dǎ sǎo",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 17 课"
+        ]
+    },
+    {
+        "word": "干净",
+        "pinyin": "gān jìng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 17 课"
+        ]
+    },
+    {
+        "word": "东北",
+        "pinyin": "dōng běi",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 18 课"
+        ]
+    },
+    {
+        "word": "密密层层",
+        "pinyin": "mì mì céng céng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 18 课"
+        ]
+    },
+    {
+        "word": "严严实实",
+        "pinyin": "yán yán shí shí",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 18 课"
+        ]
+    },
+    {
+        "word": "视线",
+        "pinyin": "shì xiàn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 18 课"
+        ]
+    },
+    {
+        "word": "山谷",
+        "pinyin": "shān gǔ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 18 课"
+        ]
+    },
+    {
+        "word": "起来",
+        "pinyin": "qǐ lái",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 18 课"
+        ]
+    },
+    {
+        "word": "照射",
+        "pinyin": "zhào shè",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 18 课"
+        ]
+    },
+    {
+        "word": "各种各样",
+        "pinyin": "gè zhǒng gè yàng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 18 课"
+        ]
+    },
+    {
+        "word": "花坛",
+        "pinyin": "huā tán",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 18 课"
+        ]
+    },
+    {
+        "word": "显得",
+        "pinyin": "xiǎn de",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 18 课"
+        ]
+    },
+    {
+        "word": "苍翠",
+        "pinyin": "cāng cuì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 18 课"
+        ]
+    },
+    {
+        "word": "药材",
+        "pinyin": "yào cái",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 18 课"
+        ]
+    },
+    {
+        "word": "捕捉",
+        "pinyin": "bǔ zhuō",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 18 课"
+        ]
+    },
+    {
+        "word": "野兔",
+        "pinyin": "yě tù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 18 课"
+        ]
+    },
+    {
+        "word": "景色",
+        "pinyin": "jǐng sè",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 18 课"
+        ]
+    },
+    {
+        "word": "宝库",
+        "pinyin": "bǎo kù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 18 课"
+        ]
+    },
+    {
+        "word": "大自然",
+        "pinyin": "dà zì rán",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 21 课"
+        ]
+    },
+    {
+        "word": "美妙",
+        "pinyin": "měi miào",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 21 课"
+        ]
+    },
+    {
+        "word": "音乐家",
+        "pinyin": "yīn yuè jiā",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 21 课"
+        ]
+    },
+    {
+        "word": "手风琴",
+        "pinyin": "shǒu fēng qín",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 21 课"
+        ]
+    },
+    {
+        "word": "歌手",
+        "pinyin": "gē shǒu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 21 课"
+        ]
+    },
+    {
+        "word": "感受",
+        "pinyin": "gǎn shòu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 21 课"
+        ]
+    },
+    {
+        "word": "温柔",
+        "pinyin": "wēn róu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 21 课"
+        ]
+    },
+    {
+        "word": "合奏",
+        "pinyin": "hé zòu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 21 课"
+        ]
+    },
+    {
+        "word": "充满",
+        "pinyin": "chōng mǎn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 21 课"
+        ]
+    },
+    {
+        "word": "威力",
+        "pinyin": "wēi lì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 21 课"
+        ]
+    },
+    {
+        "word": "乐器",
+        "pinyin": "yuè qì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 21 课"
+        ]
+    },
+    {
+        "word": "屋顶",
+        "pinyin": "wū dǐng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 21 课"
+        ]
+    },
+    {
+        "word": "河流",
+        "pinyin": "hé liú",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 21 课"
+        ]
+    },
+    {
+        "word": "轻快",
+        "pinyin": "qīng kuài",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 21 课"
+        ]
+    },
+    {
+        "word": "合唱",
+        "pinyin": "hé chàng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 21 课"
+        ]
+    },
+    {
+        "word": "水塘",
+        "pinyin": "shuǐ táng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 21 课"
+        ]
+    },
+    {
+        "word": "昆虫",
+        "pinyin": "kūn chóng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "万物",
+        "pinyin": "wàn wù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "沉思",
+        "pinyin": "chén sī",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "搬家",
+        "pinyin": "bān jiā",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "井然有序",
+        "pinyin": "jǐng rán yǒu xù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "精神",
+        "pinyin": "jīng shén",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "植物",
+        "pinyin": "zhí wù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "千姿百态",
+        "pinyin": "qiān zī bǎi tài",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "鲜美",
+        "pinyin": "xiān měi",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "池塘",
+        "pinyin": "chí táng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "秋高气爽",
+        "pinyin": "qiū gāo qì shuǎng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "倒映",
+        "pinyin": "dào yìng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "游玩",
+        "pinyin": "yóu wán",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "画册",
+        "pinyin": "huà cè",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "无穷",
+        "pinyin": "wú qióng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "奥秘",
+        "pinyin": "ào mì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "无尽",
+        "pinyin": "wú jìn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "田螺",
+        "pinyin": "tián luó",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "螃蟹",
+        "pinyin": "páng xiè",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "鲤鱼",
+        "pinyin": "lǐ yú",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "鲫鱼",
+        "pinyin": "jì yú",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "鲨鱼",
+        "pinyin": "shā yú",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 22 课"
+        ]
+    },
+    {
+        "word": "生物",
+        "pinyin": "shēng wù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "从事",
+        "pinyin": "cóng shì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "成就",
+        "pinyin": "chéng jiù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "学期",
+        "pinyin": "xué qī",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "考试",
+        "pinyin": "kǎo shì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "再三",
+        "pinyin": "zài sān",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "同意",
+        "pinyin": "tóng yì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "难得",
+        "pinyin": "nán dé",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "值班",
+        "pinyin": "zhí bān",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "努力",
+        "pinyin": "nǔ lì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "留学",
+        "pinyin": "liú xué",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "国家",
+        "pinyin": "guó jiā",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "落后",
+        "pinyin": "luò hòu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "地位",
+        "pinyin": "dì wèi",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "环节",
+        "pinyin": "huán jié",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "难度",
+        "pinyin": "nán dù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "刻苦",
+        "pinyin": "kè kǔ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "兴奋",
+        "pinyin": "xīng fèn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 24 课"
+        ]
+    },
+    {
+        "word": "手术台",
+        "pinyin": "shǒu shù tái",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "阵地",
+        "pinyin": "zhèn dì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "战斗",
+        "pinyin": "zhàn dòu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "打响",
+        "pinyin": "dǎ xiǎng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "消灭",
+        "pinyin": "xiāo miè",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "伤员",
+        "pinyin": "shāng yuán",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "陆续",
+        "pinyin": "lù xù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "血丝",
+        "pinyin": "xuè sī",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "匆匆",
+        "pinyin": "cōng cōng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "医生",
+        "pinyin": "yī shēng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "转告",
+        "pinyin": "zhuǎn gào",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "赶忙",
+        "pinyin": "gǎn máng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "迅速",
+        "pinyin": "xùn sù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "争分夺秒",
+        "pinyin": "zhēng fēn duó miǎo",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "连续",
+        "pinyin": "lián xù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "怒目圆睁",
+        "pinyin": "nù mù yuán zhēng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "眨眼",
+        "pinyin": "zhǎ yǎn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "眼眶",
+        "pinyin": "yǎn kuàng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "目瞪口呆",
+        "pinyin": "mù dèng kǒu dāi",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "耳闻目睹",
+        "pinyin": "ěr wén mù dǔ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "第 25 课"
+        ]
+    },
+    {
+        "word": "呼吸",
+        "pinyin": "hū xī",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "读书",
+        "pinyin": "dú shū",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "汗水",
+        "pinyin": "hàn shuǐ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "阿姨",
+        "pinyin": "ā yí",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "孔雀",
+        "pinyin": "kǒng què",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "欢唱",
+        "pinyin": "huān chàng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "好奇",
+        "pinyin": "hào qí",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "处罚",
+        "pinyin": "chǔ fá",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "互相",
+        "pinyin": "hù xiāng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "碰触",
+        "pinyin": "pèng chù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "黄色",
+        "pinyin": "huáng sè",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "雨珠",
+        "pinyin": "yǔ zhū",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "粘贴",
+        "pinyin": "zhān tiē",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "印记",
+        "pinyin": "yìn jì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "平展",
+        "pinyin": "píng zhǎn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "笔盒",
+        "pinyin": "bǐ hé",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "银杏",
+        "pinyin": "yín xìng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "挤压",
+        "pinyin": "jǐ yā",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "争斗",
+        "pinyin": "zhēng dòu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "勾住",
+        "pinyin": "gōu zhù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "告诉",
+        "pinyin": "gào su",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "挖洞",
+        "pinyin": "wā dòng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "一枚邮票",
+        "pinyin": "yī méi yóu piào",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "等待",
+        "pinyin": "děng dài",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "钻研",
+        "pinyin": "zuān yán",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "爬行",
+        "pinyin": "pá xíng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "晒太阳",
+        "pinyin": "shài tài yáng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "响起",
+        "pinyin": "xiǎng qǐ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "哦",
+        "pinyin": "ò",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "砍光",
+        "pinyin": "kǎn guāng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "饥饿",
+        "pinyin": "jī è",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "吃饱",
+        "pinyin": "chī bǎo",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "火辣",
+        "pinyin": "huǒ là",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "统一",
+        "pinyin": "tǒng yī",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "图书馆",
+        "pinyin": "tú shū guǎn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "葫芦",
+        "pinyin": "hú lu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "错误",
+        "pinyin": "cuò wù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "龙宫",
+        "pinyin": "lóng gōng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "肯定冒险",
+        "pinyin": "kěn dìng mào xiǎn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "公式",
+        "pinyin": "gōng shì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "寒冷",
+        "pinyin": "hán lěng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "另外",
+        "pinyin": "lìng wài",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "眼睛",
+        "pinyin": "yǎn jīng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "卷起",
+        "pinyin": "juǎn qǐ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "胃口",
+        "pinyin": "wèi kǒu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "管道",
+        "pinyin": "guǎn dào",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "咬住",
+        "pinyin": "yǎo zhù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "咱们",
+        "pinyin": "zán men",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "勇敢",
+        "pinyin": "yǒng gǎn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "棕树",
+        "pinyin": "zōng shù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "灰色",
+        "pinyin": "huī sè",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "紧跟",
+        "pinyin": "jǐn gēn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "踩水",
+        "pinyin": "cǎi shuǐ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "透明",
+        "pinyin": "tòu míng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "除法",
+        "pinyin": "chú fǎ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "抽芽",
+        "pinyin": "chōu yá",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "封口",
+        "pinyin": "fēng kǒu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "挡住",
+        "pinyin": "dǎng zhù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "松软",
+        "pinyin": "sōng ruǎn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "刮风",
+        "pinyin": "guā fēng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "大自然的声音",
+        "pinyin": "dà zì rán de shēng yīn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "汇合",
+        "pinyin": "huì hé",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "鸣叫",
+        "pinyin": "míng jiào",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "龙虾",
+        "pinyin": "lóng xiā",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "仅有",
+        "pinyin": "jǐn yǒu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "光荣",
+        "pinyin": "guāng róng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "干枯",
+        "pinyin": "gān kū",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "鱼刺",
+        "pinyin": "yú cì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "梨树",
+        "pinyin": "lí shù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "部分",
+        "pinyin": "bù fen",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "世界",
+        "pinyin": "shì jiè",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "书册",
+        "pinyin": "shū cè",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "忠诚",
+        "pinyin": "zhōng chéng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "飞鸟",
+        "pinyin": "fēi niǎo",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "一定要争气",
+        "pinyin": "yī dìng yào zhēng qì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "思念",
+        "pinyin": "sī niàn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "差别",
+        "pinyin": "chā bié",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "平均",
+        "pinyin": "píng jūn",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "退步",
+        "pinyin": "tuì bù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "单一",
+        "pinyin": "dān yī",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "巧合",
+        "pinyin": "qiǎo hé",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "更加",
+        "pinyin": "gèng jiā",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "手术台就是阵地",
+        "pinyin": "shǒu shù tái jiù shì zhèn dì",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "木棒",
+        "pinyin": "mù bàng",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "夺取",
+        "pinyin": "duó qǔ",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "盘子",
+        "pinyin": "pán zi",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "需要",
+        "pinyin": "xū yào",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "敌人",
+        "pinyin": "dí rén",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "抬头",
+        "pinyin": "tái tóu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "仍然",
+        "pinyin": "réng rán",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "继续",
+        "pinyin": "jì xù",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "睡觉",
+        "pinyin": "shuì jiào",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "眉毛",
+        "pinyin": "méi mao",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    },
+    {
+        "word": "石油",
+        "pinyin": "shí yóu",
+        "lastTested": 1769337075117,
+        "tags": [
+            "词语卷子"
+        ]
+    }
 ]

@@ -495,6 +495,92 @@
         }
         #back-to-top:active { transform: scale(0.9); }
 
+        /* 新增：搜索下拉框样式 */
+        .search-dropdown {
+            position: absolute;
+            top: 100%; left: 0; right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 1100;
+            max-height: 250px;
+            overflow-y: auto;
+            list-style: none;
+            padding: 0;
+            margin: 5px 0 0 0;
+            display: none;
+            border: 1px solid #e5e5ea;
+        }
+        .search-result-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .search-result-item:last-child { border-bottom: none; }
+        .search-result-item:active { background: #f2f2f7; }
+
+        /* 搜索定位高亮动画 */
+        .highlight-flash {
+            animation: flash-bg 2s ease-out;
+            border: 2px solid var(--primary-color) !important; /* 强制边框高亮 */
+        }
+        @keyframes flash-bg {
+            0% { background-color: #fff9c4; transform: scale(1.02); }
+            50% { background-color: #fff9c4; }
+            100% { background-color: var(--card-bg); transform: scale(1); }
+        }
+
+        /* 新增：标签相关样式 */
+        .tag-row {
+            margin-top: 10px;
+        }
+        /* 列表项中的标签 */
+        .item-tags {
+            margin-top: 4px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .tag-badge {
+            font-size: 10px;
+            color: #666;
+            background: #f0f0f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* 标签筛选栏 */
+        .filter-bar {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 5px 2px 15px 2px;
+            margin-bottom: 5px;
+            -webkit-overflow-scrolling: touch; /* iOS 顺滑滚动 */
+        }
+        .filter-pill {
+            padding: 6px 14px;
+            background: #fff;
+            border: 1px solid #e5e5ea;
+            border-radius: 16px;
+            font-size: 13px;
+            color: #666;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+        .filter-pill.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 10px rgba(0,122,255,0.25);
+        }
+
     </style>
 </head>
 <body>
@@ -512,7 +598,12 @@
             <input type="text" id="new-pinyin" placeholder="拼音">
             <button class="btn secondary" onclick="autoGeneratePinyin()" style="padding: 0 15px; font-size: 14px; white-space: nowrap;">生成拼音</button>
         </div>
-        <div style="display: flex; gap: 10px;">
+        <!-- 新增：标签输入 -->
+        <div class="input-row tag-row">
+             <input type="text" id="new-tags" placeholder="标签 (如有多个请用空格分隔，如：第一单元 重点)">
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 12px;">
             <button class="btn block" style="flex:1" id="submit-btn" onclick="handleWordSubmit()">添加</button>
             <button class="btn secondary" id="cancel-btn" onclick="cancelEdit()" style="display:none; width: 80px;">取消</button>
         </div>
@@ -527,6 +618,22 @@
         <div class="btn" onclick="showHistory()" style="background-color: #E3F2FD; color: #007aff;">历史记录</div>
         <div class="btn danger" onclick="deleteSelected()">删除选中</div>
         <div class="btn danger" onclick="clearWords()">清空全部</div>
+    </div>
+
+    <!-- 修改：实时搜索栏 -->
+    <div class="input-row" style="margin-bottom: 10px; position: relative;">
+        <input type="search" id="search-input" placeholder="🔍 搜索词语或拼音..." 
+               style="background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.05);"
+               autocomplete="off"
+               oninput="handleSearch(this.value)"
+               onfocus="handleSearch(this.value)"
+               onblur="setTimeout(() => { document.getElementById('search-results').style.display='none' }, 200)">
+        <ul id="search-results" class="search-dropdown"></ul>
+    </div>
+
+    <!-- 新增：标签筛选栏 -->
+    <div class="filter-bar" id="tag-filter-container">
+        <!-- JS 生成 -->
     </div>
 
     <ul class="word-list" id="word-list-dom">
@@ -598,18 +705,24 @@
 <script>
     // 默认数据
     let words = [
-        { id: 1, text: "清脆", pinyin: "qīng cuì", checked: true },
-        { id: 2, text: "糟糕", pinyin: "zāo gāo", checked: true },
-        { id: 3, text: "蝴蝶", pinyin: "hú dié", checked: false }
+        { id: 1, text: "清脆", pinyin: "qīng cuì", checked: true, tags: ["第一单元"] },
+        { id: 2, text: "糟糕", pinyin: "zāo gāo", checked: true, tags: ["第一单元", "易错"] },
+        { id: 3, text: "蝴蝶", pinyin: "hú dié", checked: false, tags: ["第二单元"] }
     ];
 
     let editingIndex = -1;
     // 新增：记录区间选择的起始索引
     let rangeStartIndex = -1;
+    // 新增：当前筛选的标签
+    let currentFilterTag = null; 
 
     window.onload = function() {
         const saved = localStorage.getItem('dictation_words');
-        if (saved) { words = JSON.parse(saved); }
+        if (saved) { 
+            words = JSON.parse(saved); 
+            // 兼容旧数据，确保有 tags 字段
+            words.forEach(w => { if(!w.tags) w.tags = []; });
+        }
         renderList();
     };
 
@@ -622,14 +735,27 @@
         const listDom = document.getElementById('word-list-dom');
         listDom.innerHTML = '';
         
-        // 更新统计信息
-        const selectedCount = words.filter(w => w.checked).length;
-        document.getElementById('word-stats').innerText = `已选 ${selectedCount} / 共 ${words.length}`;
+        // 1. 渲染筛选栏
+        renderFilterBar();
 
+        let visibleCount = 0;
+        
         words.forEach((item, index) => {
+            // 新增：标签筛选逻辑
+            if (currentFilterTag && (!item.tags || !item.tags.includes(currentFilterTag))) {
+                return; // 被筛选掉，不渲染
+            }
+            visibleCount++;
+
             const li = document.createElement('li');
             li.className = 'word-item';
-            // 修改：HTML结构调整，拼音放在汉字前面，按钮组纵向排列
+            li.id = 'word-item-' + index; // 新增：添加ID用于定位
+            
+            // 生成标签HTML
+            const tagsHtml = (item.tags && item.tags.length > 0) 
+                ? `<div class="item-tags">${item.tags.map(t => `<span class="tag-badge">${t}</span>`).join('')}</div>` 
+                : '';
+
             li.innerHTML = `
                 <div class="word-item-top">
                     <!-- 左侧选框组 -->
@@ -639,13 +765,14 @@
                     <div class="checkbox-wrapper" onclick="toggleCheck(${index})">
                         <div class="custom-checkbox ${item.checked ? 'checked' : ''}"></div>
                     </div>
-                    
-                    <!-- 中间内容：先拼音后汉字 -->
+            
+                    <!-- 中间内容：先拼音后汉字，再加标签 -->
                     <div class="word-content" onclick="toggleCheck(${index})">
                         <div class="word-pinyin">${item.pinyin}</div>
                         <div class="word-text">${item.text}</div>
+                        ${tagsHtml}
                     </div>
-                    
+            
                     <!-- 右侧按钮：纵向堆叠 -->
                     <div class="action-btns">
                         <div class="icon-btn" onclick="editWord(${index})">编辑</div>
@@ -656,6 +783,115 @@
             `;
             listDom.appendChild(li);
         });
+
+        // 恢复统计显示
+        const selectedCount = words.filter(w => w.checked).length;
+        const filterInfo = currentFilterTag ? ` (筛选: ${currentFilterTag})` : '';
+        document.getElementById('word-stats').innerText = `已选 ${selectedCount} / 共 ${words.length}${filterInfo}`;
+    }
+
+    // 新增：渲染筛选栏功能
+    function renderFilterBar() {
+        const container = document.getElementById('tag-filter-container');
+        // 收集所有去重的标签
+        const allTags = new Set();
+        words.forEach(w => {
+            if (w.tags && Array.isArray(w.tags)) {
+                w.tags.forEach(t => allTags.add(t));
+            }
+        });
+        
+        // 如果没有标签，隐藏筛选栏
+        if (allTags.size === 0) {
+            container.style.display = 'none';
+            return;
+        }
+        container.style.display = 'flex';
+
+        let html = `
+            <div class="filter-pill ${currentFilterTag === null ? 'active' : ''}" 
+                 onclick="applyFilter(null)">全部</div>
+        `;
+        
+        // 排序并生成标签按钮
+        Array.from(allTags).sort().forEach(tag => {
+            html += `
+                <div class="filter-pill ${currentFilterTag === tag ? 'active' : ''}" 
+                     onclick="applyFilter('${tag}')">${tag}</div>
+            `;
+        });
+        
+        // 只有内容改变时才更新HTML，避免滚动位置重置
+        if (container.innerHTML !== html) { 
+            // 注意：这样还是会重置滚动条，为了体验好一点，可以简略处理
+            // 这里简单覆盖
+            container.innerHTML = html;
+        }
+    }
+
+    function applyFilter(tag) {
+        currentFilterTag = tag;
+        // 切换标签时，取消正在进行的编辑（防止索引混乱带来的问题，虽然现在索引是安全的，但为了UI一致性）
+        cancelEdit();
+        // 重置区间选择
+        rangeStartIndex = -1;
+        renderList();
+    }
+
+    // 修改：处理搜索 (下拉展示逻辑)
+    function handleSearch(val) {
+        const dropdown = document.getElementById('search-results');
+        const term = val.trim().toLowerCase();
+        
+        if (!term) {
+            dropdown.style.display = 'none';
+            return;
+        }
+
+        const matches = words.map((item, index) => ({ item, index }))
+            .filter(({ item }) => {
+                return item.text.toLowerCase().includes(term) || 
+                       (item.pinyin || "").toLowerCase().includes(term);
+            });
+        
+        if (matches.length === 0) {
+            dropdown.innerHTML = '<li class="search-result-item" style="color:#999; justify-content:center;">无匹配结果</li>';
+        } else {
+            dropdown.innerHTML = matches.map(m => `
+                <li class="search-result-item" onclick="locateWord(${m.index})">
+                    <span style="font-weight:bold; color:#333;">${m.item.text}</span>
+                    <span style="font-size:12px; color:#888;">${m.item.pinyin}</span>
+                </li>
+            `).join('');
+        }
+        dropdown.style.display = 'block';
+    }
+
+    // 新增：定位词语功能
+    function locateWord(index) {
+        // 隐藏搜索结果
+        document.getElementById('search-results').style.display = 'none';
+        
+        // 兼容标签筛选：如果该词被当前筛选条件隐藏了，则清除筛选
+        const targetWord = words[index];
+        if (currentFilterTag && (!targetWord.tags || !targetWord.tags.includes(currentFilterTag))) {
+            currentFilterTag = null; // 清除筛选
+            renderList(); // 重新渲染显示全部
+            // 稍微延迟等待渲染完成
+            setTimeout(() => doLocate(index), 50);
+        } else {
+            doLocate(index);
+        }
+    }
+
+    function doLocate(index) {
+        const targetLi = document.getElementById('word-item-' + index);
+        if (targetLi) {
+            targetLi.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            targetLi.classList.remove('highlight-flash');
+            void targetLi.offsetWidth; // 触发回流
+            targetLi.classList.add('highlight-flash');
+        }
     }
 
     // --- 自动生成拼音 ---
@@ -673,19 +909,31 @@
     function handleWordSubmit() {
         const w = document.getElementById('new-word').value.trim();
         const p = document.getElementById('new-pinyin').value.trim();
+        // 新增：获取标签
+        const tagStr = document.getElementById('new-tags').value.trim();
+        // 按空格分隔标签并去空
+        const tags = tagStr ? tagStr.split(/\s+/).filter(t => t) : [];
         
         if(!w) return alert('请输入词语');
 
         if (editingIndex === -1) {
-            words.push({ id: Date.now(), text: w, pinyin: p || ' ', checked: true });
+            words.push({ 
+                id: Date.now(), 
+                text: w, 
+                pinyin: p || ' ', 
+                checked: true,
+                tags: tags 
+            });
         } else {
             words[editingIndex].text = w;
             words[editingIndex].pinyin = p;
+            words[editingIndex].tags = tags;
             cancelEdit();
         }
         
         document.getElementById('new-word').value = '';
         document.getElementById('new-pinyin').value = '';
+        document.getElementById('new-tags').value = '';
         save();
     }
 
@@ -694,6 +942,9 @@
         const item = words[index];
         document.getElementById('new-word').value = item.text;
         document.getElementById('new-pinyin').value = item.pinyin;
+        // 新增：回显标签
+        document.getElementById('new-tags').value = item.tags ? item.tags.join(' ') : '';
+        
         document.getElementById('submit-btn').innerText = "保存";
         document.getElementById('cancel-btn').style.display = "inline-block";
         document.getElementById('new-word').focus();
@@ -704,6 +955,7 @@
         editingIndex = -1;
         document.getElementById('new-word').value = '';
         document.getElementById('new-pinyin').value = '';
+        document.getElementById('new-tags').value = ''; // 清空标签输入
         document.getElementById('submit-btn').innerText = "添加";
         document.getElementById('cancel-btn').style.display = "none";
     }
@@ -878,7 +1130,6 @@
     function openModal(title, content, isImport) {
         const modal = document.getElementById('io-modal');
         modal.style.display = 'flex'; 
-        
         document.getElementById('modal-title').innerText = title;
         document.getElementById('io-textarea').value = content;
         
@@ -913,8 +1164,13 @@
     function closeModal() { document.getElementById('io-modal').style.display = 'none'; }
     
     function exportJson() {
-        // 修改：导出时包含 lastTested 字段
-        const exportData = words.map(w => ({ word: w.text, pinyin: w.pinyin, lastTested: w.lastTested }));
+        // 修改：导出时包含 lastTested 和 tags 字段
+        const exportData = words.map(w => ({ 
+            word: w.text, 
+            pinyin: w.pinyin, 
+            lastTested: w.lastTested,
+            tags: w.tags // 导出标签
+        }));
         openModal('导出内容', JSON.stringify(exportData, null, 2), false);
     }
     
@@ -930,7 +1186,8 @@
                 text: i.word || i.text,
                 pinyin: i.pinyin || '',
                 checked: true,
-                lastTested: i.lastTested || null // 修改：导入时保留测试时间
+                lastTested: i.lastTested || null,
+                tags: i.tags || [] // 导入标签
             })).filter(i => i.text);
             
             if(confirm('覆盖当前列表? 取消则追加。')) words = newWords;
