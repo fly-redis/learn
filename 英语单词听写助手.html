@@ -1296,7 +1296,7 @@
         
         textarea.value = '正在从 github 获取数据...';
         
-        // 设置3秒超时
+        // 设置30秒超时
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 30000);
 
@@ -1313,7 +1313,7 @@
             .catch(err => {
                 if (err.name === 'AbortError') {
                     textarea.value = '';
-                    alert('同步失败: 请求超时 (3秒)');
+                    alert('同步失败: 请求超时 (30秒)');
                 } else {
                     textarea.value = '';
                     alert('同步失败: ' + err.message);
