@@ -4,7 +4,1203 @@ import json
 import time
 
 # 可以在这里填入你的集合数据，或者取消下方注释从文件读取
-words_list = [
+words_list = [{
+		"english": "hello",
+		"chinese": "喂;你好",
+		"tags": [
+			"unit1",
+			"p4"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "hi",
+		"chinese": "嗨;你好(非正式用语,=hello)",
+		"tags": [
+			"unit1",
+			"p4"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "I",
+		"chinese": "我",
+		"tags": [
+			"unit1",
+			"p4"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "am",
+		"chinese": "是(用于第一人称代词I后)",
+		"tags": [
+			"unit1",
+			"p4"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "I’m",
+		"chinese": "我是(I am的缩写)",
+		"tags": [
+			"unit1",
+			"p4"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "Miss",
+		"chinese": "小姐,女士(用于未婚女子姓氏或姓名前)",
+		"tags": [
+			"unit1",
+			"p4"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "what",
+		"chinese": "什么",
+		"tags": [
+			"unit1",
+			"p4"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "is",
+		"chinese": "是(用于代词he､she､it,单数名词或不可数名词后)",
+		"tags": [
+			"unit1",
+			"p4"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "what’s",
+		"chinese": "是什么(what is的缩写)",
+		"tags": [
+			"unit1",
+			"p4"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "your",
+		"chinese": "你的;你们的",
+		"tags": [
+			"unit1",
+			"p4"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "name",
+		"chinese": "名字",
+		"tags": [
+			"unit1",
+			"p4"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "stand up",
+		"chinese": "起立;站起来",
+		"tags": [
+			"unit1",
+			"p4"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "boy",
+		"chinese": "男孩",
+		"tags": [
+			"unit1",
+			"p4"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "and",
+		"chinese": "和",
+		"tags": [
+			"unit1",
+			"p4"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "girl",
+		"chinese": "女孩",
+		"tags": [
+			"unit1",
+			"p4"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "sit down",
+		"chinese": "坐下",
+		"tags": [
+			"unit1",
+			"p4"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "Mr",
+		"chinese": "先生(用于男子的姓氏或姓名前)",
+		"tags": [
+			"unit1",
+			"p8"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "dad",
+		"chinese": "爸爸(非正式用语)",
+		"tags": [
+			"unit1",
+			"p8"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "Good morning!",
+		"chinese": "早上好!上午好!",
+		"tags": [
+			"unit1",
+			"p6"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "Good afternoon!",
+		"chinese": "下午好!",
+		"tags": [
+			"unit1",
+			"p6"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "Good evening!",
+		"chinese": "晚上好!",
+		"tags": [
+			"unit1",
+			"p6"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "Goodbye!",
+		"chinese": "再见!",
+		"tags": [
+			"unit1",
+			"p8"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "Good night!",
+		"chinese": "晚安!",
+		"tags": [
+			"unit1",
+			"p8"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "Bye!",
+		"chinese": "再见!",
+		"tags": [
+			"unit1",
+			"p8"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "pencil",
+		"chinese": "铅笔",
+		"tags": [
+			"unit2",
+			"p16"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "sharpener",
+		"chinese": "卷笔刀",
+		"tags": [
+			"unit2",
+			"p16"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "pencil box",
+		"chinese": "文具盒",
+		"tags": [
+			"unit2",
+			"p16"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "schoolbag",
+		"chinese": "书包",
+		"tags": [
+			"unit2",
+			"p16"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "eraser",
+		"chinese": "橡皮;黑板擦",
+		"tags": [
+			"unit2",
+			"p18"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "crayon",
+		"chinese": "彩色蜡笔",
+		"tags": [
+			"unit2",
+			"p18"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "pen",
+		"chinese": "钢笔",
+		"tags": [
+			"unit2",
+			"p18"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "ruler",
+		"chinese": "直尺",
+		"tags": [
+			"unit2",
+			"p18"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "look",
+		"chinese": "看",
+		"tags": [
+			"unit2",
+			"p16"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "have",
+		"chinese": "有",
+		"tags": [
+			"unit2",
+			"p16"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "a",
+		"chinese": "一个",
+		"tags": [
+			"unit2",
+			"p16"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "new",
+		"chinese": "新的;新来的;新买的",
+		"tags": [
+			"unit2",
+			"p16"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "it",
+		"chinese": "它",
+		"tags": [
+			"unit2",
+			"p16"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "it’s",
+		"chinese": "它是(it is的缩写)",
+		"tags": [
+			"unit2",
+			"p16"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "nice",
+		"chinese": "好看的;令人愉悦的",
+		"tags": [
+			"unit2",
+			"p16"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "can",
+		"chinese": "能;会",
+		"tags": [
+			"unit2",
+			"p18"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "use",
+		"chinese": "用;使用",
+		"tags": [
+			"unit2",
+			"p18"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "find",
+		"chinese": "发现;找到",
+		"tags": [
+			"unit2",
+			"p18"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "my",
+		"chinese": "我的",
+		"tags": [
+			"unit2",
+			"p18"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "sure",
+		"chinese": "当然(表示同意)",
+		"tags": [
+			"unit2",
+			"p18"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "you",
+		"chinese": "你;你们",
+		"tags": [
+			"unit2",
+			"p18"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "sorry",
+		"chinese": "抱歉",
+		"tags": [
+			"unit2",
+			"p18"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "don’t",
+		"chinese": "没,不(do not的缩写,表示否定)",
+		"tags": [
+			"unit2",
+			"p18"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "Here you are.",
+		"chinese": "给你｡",
+		"tags": [
+			"unit2",
+			"p18"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "Thank you!",
+		"chinese": "谢谢你!",
+		"tags": [
+			"unit2",
+			"p18"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "You’re welcome.",
+		"chinese": "不用谢｡",
+		"tags": [
+			"unit2",
+			"p18"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "ball",
+		"chinese": "球",
+		"tags": [
+			"unit3",
+			"p28"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "doll",
+		"chinese": "玩偶;玩具娃娃",
+		"tags": [
+			"unit3",
+			"p28"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "kite",
+		"chinese": "风筝",
+		"tags": [
+			"unit3",
+			"p28"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "jigsaw",
+		"chinese": "拼图;拼板玩具",
+		"tags": [
+			"unit3",
+			"p28"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "toy",
+		"chinese": "玩具",
+		"tags": [
+			"unit3",
+			"p30"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "cat",
+		"chinese": "猫",
+		"tags": [
+			"unit3",
+			"p30"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "dog",
+		"chinese": "狗",
+		"tags": [
+			"unit3",
+			"p30"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "bike",
+		"chinese": "自行车",
+		"tags": [
+			"unit3",
+			"p30"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "bus",
+		"chinese": "公共汽车",
+		"tags": [
+			"unit3",
+			"p30"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "this",
+		"chinese": "这,这个(指较近的人或事物)",
+		"tags": [
+			"unit3",
+			"p28"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "mum",
+		"chinese": "妈妈(〈英〉非正式用语;〈美〉mom)",
+		"tags": [
+			"unit3",
+			"p28"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "gift",
+		"chinese": "礼物",
+		"tags": [
+			"unit3",
+			"p28"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "for",
+		"chinese": "对,给(表示对象､用途等)",
+		"tags": [
+			"unit3",
+			"p28"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "so",
+		"chinese": "很;极",
+		"tags": [
+			"unit3",
+			"p30"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "cute",
+		"chinese": "可爱的",
+		"tags": [
+			"unit3",
+			"p30"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "play with",
+		"chinese": "玩……;和……一起玩",
+		"tags": [
+			"unit3",
+			"p30"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "good",
+		"chinese": "好的;亲密的",
+		"tags": [
+			"unit3",
+			"p32"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "friend",
+		"chinese": "朋友",
+		"tags": [
+			"unit3",
+			"p32"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "she",
+		"chinese": "她",
+		"tags": [
+			"unit3",
+			"p32"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "has",
+		"chinese": "有(用于第三人称单数代词､不可数名词或单数可数名词后)",
+		"tags": [
+			"unit3",
+			"p32"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "often",
+		"chinese": "经常",
+		"tags": [
+			"unit3",
+			"p32"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "share",
+		"chinese": "分享",
+		"tags": [
+			"unit3",
+			"p32"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "Happy birthday!",
+		"chinese": "生日快乐!",
+		"tags": [
+			"unit3",
+			"p28"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "face",
+		"chinese": "脸;面孔",
+		"tags": [
+			"unit4",
+			"p44"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "hair",
+		"chinese": "头发",
+		"tags": [
+			"unit4",
+			"p44"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "eye",
+		"chinese": "眼睛",
+		"tags": [
+			"unit4",
+			"p44"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "ear",
+		"chinese": "耳朵",
+		"tags": [
+			"unit4",
+			"p44"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "nose",
+		"chinese": "鼻子",
+		"tags": [
+			"unit4",
+			"p44"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "mouth",
+		"chinese": "嘴",
+		"tags": [
+			"unit4",
+			"p44"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "long",
+		"chinese": "长的",
+		"tags": [
+			"unit4",
+			"p46"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "short",
+		"chinese": "短的;矮的",
+		"tags": [
+			"unit4",
+			"p46"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "big",
+		"chinese": "大的",
+		"tags": [
+			"unit4",
+			"p46"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "small",
+		"chinese": "小的",
+		"tags": [
+			"unit4",
+			"p46"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "tall",
+		"chinese": "高的",
+		"tags": [
+			"unit4",
+			"p46"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "let’s",
+		"chinese": "我们……吧!(let us的缩写,提出建议时说)",
+		"tags": [
+			"unit4",
+			"p44"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "OK",
+		"chinese": "对;好;行",
+		"tags": [
+			"unit4",
+			"p44"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "his",
+		"chinese": "他的",
+		"tags": [
+			"unit4",
+			"p44"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "he",
+		"chinese": "他",
+		"tags": [
+			"unit4",
+			"p44"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "or",
+		"chinese": "或者,还是(用以引出另一种可能性)",
+		"tags": [
+			"unit4",
+			"p46"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "her",
+		"chinese": "她的",
+		"tags": [
+			"unit4",
+			"p46"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "are",
+		"chinese": "是(用于we､you､they或复数名词等后边)",
+		"tags": [
+			"unit4",
+			"p48"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "milk",
+		"chinese": "奶",
+		"tags": [
+			"unit5",
+			"p56"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "water",
+		"chinese": "水",
+		"tags": [
+			"unit5",
+			"p56"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "tea",
+		"chinese": "茶;茶叶",
+		"tags": [
+			"unit5",
+			"p56"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "juice",
+		"chinese": "果汁",
+		"tags": [
+			"unit5",
+			"p56"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "cola",
+		"chinese": "可乐",
+		"tags": [
+			"unit5",
+			"p56"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "apple",
+		"chinese": "苹果",
+		"tags": [
+			"unit5",
+			"p58"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "banana",
+		"chinese": "香蕉",
+		"tags": [
+			"unit5",
+			"p58"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "orange",
+		"chinese": "橙子",
+		"tags": [
+			"unit5",
+			"p58"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "grape",
+		"chinese": "葡萄",
+		"tags": [
+			"unit5",
+			"p58"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "lemon",
+		"chinese": "柠檬",
+		"tags": [
+			"unit5",
+			"p58"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "drink",
+		"chinese": "饮料",
+		"tags": [
+			"unit5",
+			"p54"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "fruit",
+		"chinese": "水果",
+		"tags": [
+			"unit5",
+			"p54"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "buy",
+		"chinese": "买",
+		"tags": [
+			"unit5",
+			"p56"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "some",
+		"chinese": "一些",
+		"tags": [
+			"unit5",
+			"p56"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "too",
+		"chinese": "也;还(通常置于句末)",
+		"tags": [
+			"unit5",
+			"p56"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "tomorrow",
+		"chinese": "明天",
+		"tags": [
+			"unit5",
+			"p56"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "like",
+		"chinese": "喜欢",
+		"tags": [
+			"unit5",
+			"p58"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "want",
+		"chinese": "要;想要",
+		"tags": [
+			"unit5",
+			"p58"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "make",
+		"chinese": "做;制作",
+		"tags": [
+			"unit5",
+			"p58"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "say",
+		"chinese": "说",
+		"tags": [
+			"unit5",
+			"p60"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "ice cream",
+		"chinese": "冰激凌",
+		"tags": [
+			"unit5",
+			"p60"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "candy",
+		"chinese": "糖果",
+		"tags": [
+			"unit5",
+			"p60"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "they",
+		"chinese": "他们;她们;它们",
+		"tags": [
+			"unit5",
+			"p60"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "bad",
+		"chinese": "不好的;有害的",
+		"tags": [
+			"unit5",
+			"p60"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "cake",
+		"chinese": "蛋糕",
+		"tags": [
+			"unit6",
+			"p68"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "bread",
+		"chinese": "面包",
+		"tags": [
+			"unit6",
+			"p68"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "rice",
+		"chinese": "大米;米饭",
+		"tags": [
+			"unit6",
+			"p68"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "noodle",
+		"chinese": "面条(常用复数形式noodles)",
+		"tags": [
+			"unit6",
+			"p68"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "soup",
+		"chinese": "汤;羹",
+		"tags": [
+			"unit6",
+			"p68"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "egg",
+		"chinese": "蛋;鸡蛋",
+		"tags": [
+			"unit6",
+			"p68"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "chicken",
+		"chinese": "鸡肉",
+		"tags": [
+			"unit6",
+			"p70"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "fish",
+		"chinese": "鱼肉",
+		"tags": [
+			"unit6",
+			"p70"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "tomato",
+		"chinese": "番茄;西红柿",
+		"tags": [
+			"unit6",
+			"p70"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "potato",
+		"chinese": "马铃薯;土豆",
+		"tags": [
+			"unit6",
+			"p70"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "food",
+		"chinese": "食物",
+		"tags": [
+			"unit6",
+			"p66"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "have",
+		"chinese": "吃;喝",
+		"tags": [
+			"unit6",
+			"p68"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "but",
+		"chinese": "然而;但是",
+		"tags": [
+			"unit6",
+			"p68"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "hungry",
+		"chinese": "饥饿的",
+		"tags": [
+			"unit6",
+			"p70"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "dinner",
+		"chinese": "主餐,正餐",
+		"tags": [
+			"unit6",
+			"p70"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "need",
+		"chinese": "需要",
+		"tags": [
+			"unit6",
+			"p70"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "vegetable",
+		"chinese": "蔬菜",
+		"tags": [
+			"unit6",
+			"p70"
+		],
+		"lastTested": 1769259423694
+	},
+	{
+		"english": "tomatoes with eggs",
+		"chinese": "西红柿炒鸡蛋",
+		"tags": [
+			"unit6",
+			"p70"
+		],
+		"lastTested": 1769259423694
+	},
 	{
 		"english": "What about",
 		"chinese": "……怎么样?(用于提出建议)",
@@ -17,11 +1213,19 @@ words_list = [
 ]
 
 
+
 def download_audios():
+    # 获取当前脚本所在目录
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
     # 定义保存路径
-    base_dir = "mp3"
+    base_dir = os.path.join(script_dir, "mp3")
     if not os.path.exists(base_dir):
         os.makedirs(base_dir)
+
+    # 获取目录下现有的所有文件（为了处理大小写敏感问题）
+    # 比如单词是 "I", 期望 "I.mp3", 但目录下可能是 "i.mp3"
+    existing_files_map = {f.lower(): f for f in os.listdir(base_dir)}
 
     # 用来存储映射关系的字典
     audio_map = {}
@@ -39,14 +1243,23 @@ def download_audios():
             continue
 
         # 构造文件名
-        file_name = f"{english}.mp3"
-        save_path = os.path.join(base_dir, file_name)
+        target_name = f"{english}.mp3"
+        target_name_lower = target_name.lower()
         
-        # 检查文件是否已存在且大小大于0，避免重复下载
-        if os.path.exists(save_path) and os.path.getsize(save_path) > 0:
-            print(f"[跳过] {english} 已存在")
-            audio_map[english] = file_name
-            continue
+        # 检查文件是否已存在（利用之前构建的 map 忽略大小写匹配）
+        if target_name_lower in existing_files_map:
+            actual_filename = existing_files_map[target_name_lower]
+            save_path = os.path.join(base_dir, actual_filename)
+            
+            # 检查文件是否大小大于0，避免重复下载
+            if os.path.exists(save_path) and os.path.getsize(save_path) > 0:
+                print(f"[跳过] {english} 已存在 (匹配到: {actual_filename})")
+                audio_map[english] = actual_filename
+                continue
+
+        # 如果没找到现有文件，准备下载的新文件名
+        file_name = target_name
+        save_path = os.path.join(base_dir, file_name)
 
         # 构造请求参数
         # 百度TTS接口参数: lan=语言, text=内容, spd=语速, source=web(有助于直接访问)
@@ -70,6 +1283,8 @@ def download_audios():
                 
                 # 下载成功后记录到映射字典
                 audio_map[english] = file_name
+                # 更新本地缓存，防止同一批次有重复词时重复下载
+                existing_files_map[file_name.lower()] = file_name
 
                 # 礼貌性延时，防止请求过快被封 IP
                 time.sleep(0.5)
@@ -80,7 +1295,7 @@ def download_audios():
             print(f"  -> 发生错误: {e}")
 
     # 保存最终的映射 JSON 文件
-    output_json = "audio_map.json"
+    output_json = os.path.join(script_dir, "audio_map.json")
     with open(output_json, "w", encoding="utf-8") as f:
         json.dump(audio_map, f, ensure_ascii=False, indent=4)
     
