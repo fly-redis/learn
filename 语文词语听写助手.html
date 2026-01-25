@@ -813,8 +813,10 @@
                  onclick="applyFilter(null)">全部</div>
         `;
         
-        // 排序并生成标签按钮
-        Array.from(allTags).sort().forEach(tag => {
+        // 排序并生成标签按钮 (使用 numeric: true 实现自然排序，如 第2单元 排在 第10单元 前面)
+        Array.from(allTags).sort((a, b) => {
+            return a.localeCompare(b, 'zh-CN', { numeric: true, sensitivity: 'base' });
+        }).forEach(tag => {
             html += `
                 <div class="filter-pill ${currentFilterTag === tag ? 'active' : ''}" 
                      onclick="applyFilter('${tag}')">${tag}</div>
