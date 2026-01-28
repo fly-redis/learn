@@ -633,6 +633,7 @@
     <div style="margin-bottom: 20px; display: flex; gap: 10px;">
         <button class="btn secondary" style="flex:1" onclick="exitDictation()">退出</button>
         <button class="btn secondary" style="flex:1" onclick="toggleAllAnswers()">显示答案</button>
+        <button class="btn secondary" style="flex:1" onclick="copyDictationWords()">复制听写单词</button>
     </div>
     <div id="dictation-area"></div>
 </div>
@@ -1763,6 +1764,34 @@
         u.rate = 0.8; 
         window.speechSynthesis.speak(u);
     }
+    // ...existing code...
+function copyDictationWords() {
+    // 获取当前听写区的单词
+    const dictationCards = document.querySelectorAll('#dictation-area .dictation-card');
+    const wordsArr = Array.from(dictationCards).map(card => {
+        // 取题目和答案
+        const q = card.querySelector('.q-text')?.innerText || '';
+        const a = card.querySelector('.a-text')?.innerText || '';
+        return { question: q, answer: a };
+    });
+    const jsonText = JSON.stringify(wordsArr, null, 2) + '\n\n以上是我听写的单词, 接下来我会拍下我写的内容你来帮我判一下默写的单词是否都对';
+    // 复制到剪贴板
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(jsonText).then(() => {
+            alert('已复制听写单词到剪贴板');
+        });
+    } else {
+        // 兼容旧浏览器
+        const temp = document.createElement('textarea');
+        temp.value = jsonText;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        alert('已复制听写单词到剪贴板');
+    }
+}
+// ...existing code...
 </script>
 
 </body>
