@@ -656,6 +656,7 @@
     <div style="margin-bottom: 20px; display: flex; gap: 10px;">
         <button class="btn secondary" style="flex:1" onclick="exitDictation()">退出</button>
         <button class="btn secondary" style="flex:1" onclick="toggleAllAnswers()">显示答案</button>
+        <button class="btn secondary" style="flex:1" onclick="copyCurrentDictation()">复制听写词语/button>
     </div>
     <div id="dictation-area"></div>
 </div>
@@ -1421,7 +1422,60 @@
     function scrollToTop() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-</script>
+    // ...existing code...
 
+// 记录当前听写的词语
+let currentDictationWords = [];
+
+// 修改 startDictation，记录本次听写的词语
+const oldStartDictation = startDictation;
+startDictation = function(mode) {
+    // ...existing code...
+    const selected = words.filter(w => w.checked);
+    currentDictationWords = selected.map(w => ({
+        word: w.text,
+        pinyin: w.pinyin
+    }));
+    // ...existing code...
+    oldStartDictation.call(this, mode);
+}
+
+// 新增：复制本次听写词语
+function copyCurrentDictation() {
+    if (!currentDictationWords || currentDictationWords.length === 0) {
+        alert('暂无听写词语');
+        return;
+    }
+    const jsonText = JSON.stringify(currentDictationWords, null, 2) + '\n\n以上是我听写的词语, 接下来我会拍下我写的内容你来帮我判一下词语是否都对';
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(jsonText).then(() => {
+            alert('已复制到剪贴板');
+        }).catch(() => {
+            alert('复制失败，请手动复制');
+        });
+    } else {
+        // 兼容旧浏览器
+        const textarea = document.createElement('textarea');
+        textarea.value = jsonText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        textarea.setSelectionRange(0, 99999);
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        alert('已复制');
+    }
+}
+// ...existing code...
+</script>
+<div id="dictation-copy-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h3 style="text-align:center;">复制本次听写词语</h3>
+        <textarea id="dictation-copy-textarea" style="width:100%;height:180px;border-radius:10px;padding:10px;font-size:14px;" readonly></textarea>
+        <div class="modal-btns">
+            <button class="btn secondary" onclick="copyDictationText()">复制</button>
+            <button class="btn secondary" onclick="closeDictationCopyModal()">关闭</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
